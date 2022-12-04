@@ -1,13 +1,24 @@
+<!-- SETUP NEWS Step 10: update directories static files -->
+{% load static %}
 <!doctype html>
+
+<!-- KG: 
+    USE: this for every website page
+    Use separate templates to use across whole website
+    These are separate to be more modular 
+-->
 
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <title>She Codes News</title>
         <meta name="description" content="">
-        <meta name="author" content="Hayley van Waas">
+        <meta name="author" content="Kristy Gray">
         <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="">
+        <!-- SETUP NEWS Step 10: update directories for templates and static files -->
+        <link rel="stylesheet" type="text/css" href="{% static 'styles.css'%}">
+            <!-- SETUP NEWS Step 11: add stylesheet block -->
+            {% block stylesheets %}{% endblock %}
     </head>
 
     <body>
@@ -17,9 +28,11 @@
                     <h1>She {Codes} News</h1>
                 </a>
             </div>
-            <!-- include nav here -->
+            <!-- SETUP NEWS Step 15: Include nav template in base template-->
+            {% include './nav.html' %}
         </header>
 
-        <!-- content blocks here -->
+        <!-- SETUP NEWS Step 10: update directories for templates and static files -->
+        {% block content %}{% endblock %}
     </body>
 </html>

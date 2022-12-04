@@ -1,3 +1,12 @@
+<!-- NEWS SETUP Step 13: Style the story page -->
+{% extends "base.html" %}
+{% load static %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static
+'news/styles.css' %}">
+{% endblock %}
+{% block content %}
+
 <div id="story-wrapper">
     <h2>{{ story.title }}</h2>
     <h4>{{ story.author }}</h4>
@@ -6,3 +15,11 @@
         {{ story.content|linebreaks }}
     </div>
 </div>
+
+{% endblock %}
+
+<!-- KG: 
+Displays one specific story 
+Update folder of placeholder photos. 
+Update placeholder.
+-->

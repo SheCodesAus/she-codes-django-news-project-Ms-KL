@@ -1,21 +1,47 @@
-    <h2>Latest News</h2>
+    <!-- SETUP NEWS Step 10: use the base in the news app index file -->
+    {% extends "base.html" %}
+    {% load static %}
 
-    <div id="latest-stories">
-        {% if latest_stories %}
-            {% for story in latest_stories %}
-                <p>{{ story.title }}</p>
-            {% endfor %}
-        {% else %}
-            <p>No stories are available.</p>
-        {% endif %}
-    </div>
+    <!-- SETUP NEWS Step 11: load stylesheet in news app index-->
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+    {% endblock %}
 
-    <div id="all-stories">
-        {% if latest_stories %}
-            {% for story in all_stories %}
-                <p>{{ story.title }}</p>
-            {% endfor %}
-        {% else %}
-            <p>No stories are available.</p>
-        {% endif %}
-    </div>
+    {% block content %}
+
+        <h2>Latest News</h2>
+
+        <!-- Index page for news only, not the website -->
+
+        <div id="latest-stories">
+            {% if latest_stories %}
+                {% for story in latest_stories %}
+                    <!-- SETUP NEWS Step 12: Use story card template -->
+                    {% include "./storyCard.html" with story=story position=forloop.counter %}
+                    <!-- <p>{{ story.title }}</p> -->
+                {% endfor %}
+            {% else %}
+                <p>No stories are available.</p>
+            {% endif %}
+        </div>
+
+        <!-- NOTE -->
+        <!-- How to get news stories into the page: 
+        if there are stories in latests stories, loop through and list them -->
+
+        <div id="all-stories">
+            {% if latest_stories %}
+                {% for story in all_stories %}
+                    <!-- SETUP NEWS Step 12: Use story card template -->
+                    {% include "./storyCard.html" with story=story %}
+                    <!-- <p>{{ story.title }}</p> -->
+                {% endfor %}
+            {% else %}
+                <p>No stories are available.</p>
+            {% endif %}
+        </div>
+
+            <!-- NOTE -->
+        <!-- How to get all news stories into the page: 
+        if there are stories, loop through and list them -->
+    {% endblock %}
