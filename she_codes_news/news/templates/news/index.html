@@ -9,6 +9,10 @@
 
     {% block content %}
 
+        <!-- FORMS SETUP Step 2: Add a link to the form from the home page -->
+        <!-- !!! is this correct location? -->
+        <a href="{% url 'news:newStory' %}">Write New Story</a>
+
         <h2>Latest News</h2>
 
         <!-- Index page for news only, not the website -->
