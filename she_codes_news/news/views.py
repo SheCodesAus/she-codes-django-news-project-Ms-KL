@@ -64,15 +64,10 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # ---- ASSIGNMENT PART 1: Order the stories by date
-        # context['latest_stories'] = NewsStory.objects.all().[:4]
-        # ['latest_stories'] = like slicing. Just use first 4 stories [:4]
-        context['latest_stories'] = NewsStory.objects.all().order_by('-pub_date')[:4]
-
-        # ---- ASSIGNMENT PART 1: Order the stories by date
-        # context['all_stories'] = NewsStory.objects.all()
-        context['all_stories'] = NewsStory.objects.all().order_by('-pub_date')
-        # if we need to order from where the latest stories finish:
-        # context['all_stories'] = NewsStory.objects.all().order_by('-pub_date')[4:]
+        stories = NewsStory.objects.all().order_by('-pub_date')
+        context['latest_stories'] = stories[:4]
+        # display all stories from after the last "latest_story" is displayed
+        context['all_stories'] = stories[4:]
         return context
 
 # SETUP NEWS Step 13: Add a view for a single story
