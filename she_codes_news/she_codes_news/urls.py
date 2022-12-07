@@ -20,4 +20,9 @@ urlpatterns = [
     # SETUP NEWS Step 7: Update project urls to INCLUDE urls for news app
     path('news/', include('news.urls')),
     path('admin/', admin.site.urls),
+    # SETUP USERS Step 9: add the users app urls to the project urls
+    path('users/', include('users.urls')),
+    # SETUP USERS Step 6: add the users app urls to the project urls
+    path('users/', include('django.contrib.auth.urls')),
+    
 ]

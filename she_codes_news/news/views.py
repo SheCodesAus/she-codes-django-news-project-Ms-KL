@@ -32,6 +32,12 @@ class AddStoryView(generic.CreateView):
     template_name = 'news/createStory.html'
     success_url = reverse_lazy('news:index')
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+# USERS SETUP Step 12:  update the view to complete the author field
+
 # NOTE
 # referred to urls.py
 # class based view (part 4 in tutorial)

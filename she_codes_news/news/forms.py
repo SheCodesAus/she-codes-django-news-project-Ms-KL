@@ -8,11 +8,11 @@ from .models import NewsStory
 class StoryForm(ModelForm):
     class Meta:
         model = NewsStory
-        fields = ['title', 'author', 'pub_date', 'content']
+        fields = ['title', 'pub_date', 'content']
+        # USER SETUP: Step 12 Removed 'author'
         # FORMS SETUP Step 2: add a date picker widget
         widgets = {
             'pub_date': forms.DateInput(format=('%m/%d/%Y'),
-            attrs={'class':'form-control', 'placeholder':'Select a date',
-            'type':'date'}),
+            attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
             }
 
