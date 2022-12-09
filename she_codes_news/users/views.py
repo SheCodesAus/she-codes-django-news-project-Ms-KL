@@ -14,3 +14,10 @@ class CreateAccountView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'users/createAccount.html'
+
+# ASSIGNMENT PART 2: add an Account View
+# STEPS: add Account view, add account.html, add to model? 
+class AccountView(CreateView):
+    form_class = CustomUserCreationForm# unsure what to put
+    success_url = reverse_lazy('account')
+    template_name = 'users/account.html'
