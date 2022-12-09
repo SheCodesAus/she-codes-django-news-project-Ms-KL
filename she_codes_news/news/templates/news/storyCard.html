@@ -3,9 +3,10 @@
         Link from a story card on news page to the individual story page -->
     <a href="{% url 'news:story' story.id %}">
         {% if position < 5 %}
-            <img src="../static/news/images/placeholder-{{ position }}.jpg">
+            <!-- <img src="../static/news/images/placeholder-{{ position }}.jpg"> -->
+            <img src="{{ story.image_field }}">
         {% else %}
-            <img src="https://picsum.photos/600">
+            <img src="{{ story.image_field }}">
         {% endif %}
         <div class="story-card-text">
             <h3>{{ story.title }}</h3>
