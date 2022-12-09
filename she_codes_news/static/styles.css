@@ -52,7 +52,3 @@ a {
 a, p {
     font-family: monospace;
 }
-
-p #test-for-stylesheet {
-    color: red;
-}
