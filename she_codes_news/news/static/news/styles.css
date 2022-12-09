@@ -85,9 +85,20 @@
     width: 50%;
 }
 
-/* KG: 
-Add own classes */
+/* KG: Add own classes */
 
-#test-for-stylesheet {
-    color: red;
+/* ASSIGNMENT PART 1: STYLE THE FORM FOR ADDING NEW STORIES */
+    /* From: {{ form.as_table }} inbuilt access to td, label and input */
+
+
+#form_table {
+    text-align: left;
+}
+
+label {
+    padding-right: 20px;
+}
+
+.form-control {
+    width: 95%;
 }
