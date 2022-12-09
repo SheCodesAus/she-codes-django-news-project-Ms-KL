@@ -12,7 +12,8 @@
     <h4>{{ story.author }}</h4>
     <div id="story-content">
         <!-- <img src="{% static '/news/images/placeholder-5.jpg' %}"> -->
-        <img src="{% static '/news/images/ollie.jpg' %}">
+        <!-- <img src="{% static '/news/images/ollie.jpg' %}"> -->
+        <img src="{{ story.image_field }}">
         {{ story.content|linebreaks }}
     </div>
 </div>
