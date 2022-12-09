@@ -10,7 +10,6 @@
     {% block content %}
 
         <!-- FORMS SETUP Step 2: Add a link to the form from the home page -->
-        <!-- !!! is this correct location? -->
         <a href="{% url 'news:newStory' %}">Write New Story</a>
 
         <h2>Latest News</h2>
@@ -28,10 +27,6 @@
                 <p>No stories are available.</p>
             {% endif %}
         </div>
-
-        <!-- NOTE -->
-        <!-- How to get news stories into the page: 
-        if there are stories in latests stories, loop through and list them -->
 
         <div id="all-stories">
             {% if latest_stories %}
