@@ -1,43 +1,67 @@
-<!-- KG: Need to fill this in - a form for a new story -->
-<!-- FORMS SETUP Step 1: fill in the template -->
-
 {% extends "base.html" %}
 {% load static %}
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{% static
-'news/styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
 {% endblock %}
 {% block content %}
 
-<!-- STYLESHEET TEST -->
-<p id="test-for-stylesheet">this is a test for stylesheet </p>
-
-
-<!-- ASSIGNMENT Part 1: Question 2: Style the form for adding new stories -->
-<!-- change below: -->
-<!-- <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="submit">
-</form> -->
-
-<!-- https://colinkingswood.github.io/Model-Form-Customisation/ -->
-
- <!-- Original -->
 <form action="" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    <table id="form_table">
+        {{ form.as_table }}
+    </table>
     <input type="submit" value="submit">
 </form>
 
-<!-- <form action="" method="post">
-    {% csrf_token %}
-    {% for field in form %}
-        <div id="story-form">
-            {{ field.label }} {{ field }}
-        </div>
-    {% endfor %}
-    <input type="submit" value="submit">
-</form> -->
-
 {% endblock %}
+
+<!-- 
+
+----------------------------------------------------------------------------- 
+
+__ THIS IS A FORM TO SUBMIT A NEW STORY
+__ FORMS SETUP Step 1: fill in the template - DONE
+
+------------------------
+
+__ ASSIGNMENT PART 1: Style the form for adding new stories.
+    KG DO: 
+    - load static and css block - DONE
+    - format form as table - DONE
+    - set ID to access in CSS - DONE
+
+------------------------
+    
+__ REFERENCES:
+    - https://colinkingswood.github.io/Model-Form-Customisation/
+
+------------------------
+
+__ ORIGINAL CODE TO CHANGE: * remove -
+    {-% extends "base.html" %-}
+    {-% block content %-}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="submit">
+    </form>
+    {-% endblock %-}
+
+------------------------
+
+__ KG REJECTED ALTERNATIVE APPROACHES 
+    <div id="new_story_form">
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="story-line">
+                {{ field.label }} {{ field }}
+            </div>
+            {% endfor %}
+            <input type="submit" value="submit">
+        </form>
+    </div> 
+
+-->
+
+
