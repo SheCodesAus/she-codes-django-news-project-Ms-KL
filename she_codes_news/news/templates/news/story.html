@@ -8,13 +8,14 @@
 
 <div id="story-wrapper">
     <h2>{{ story.title }}</h2>
-    <h4>{{ story.author }}</h4>
     <div id="story-content">
         <!-- <img src="{% static '/news/images/placeholder-5.jpg' %}"> -->
         <!-- <img src="{% static '/news/images/ollie.jpg' %}"> -->
         <img src="{{ story.image_field }}">
+        <h4>Published by {{ story.author }} - {{ story.pub_date }}</h4>
         {{ story.content|linebreaks }}
     </div>
+
 </div>
 {% endblock %}
 
