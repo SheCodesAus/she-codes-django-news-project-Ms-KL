@@ -24,5 +24,4 @@ urlpatterns = [
     path('users/', include('users.urls')),
     # SETUP USERS Step 6: add the users app urls to the project urls
     path('users/', include('django.contrib.auth.urls')),
-    
 ]
