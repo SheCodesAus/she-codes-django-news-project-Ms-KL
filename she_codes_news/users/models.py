@@ -11,3 +11,5 @@ class CustomUser(AbstractUser):
         return self.username
     
     # KG: override the dunder to return the name of the user instead of the ID
+
+    # add profile picture
