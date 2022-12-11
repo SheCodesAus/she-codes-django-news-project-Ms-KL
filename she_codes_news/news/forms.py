@@ -1,16 +1,16 @@
 from django import forms
 from django.forms import ModelForm
-from .models import NewsStory
+from .models import NewsStory, Comment
 class StoryForm(ModelForm):
     class Meta:
         model = NewsStory
-        fields = ['title', 'pub_date', 'content', 'image_field']
+        fields = ['pub_date','title','image_field', 'content' ]
         # USER SETUP: Step 12 Removed 'author'
         labels = {
             'title': ('Blog Title'),
             'pub_date': ('Date Published'),
-            'content': ('Write your Blog'),
             'image_field': ('Image URL'),
+            'content': ('Write your Blog'),
         }
         # FORMS SETUP Step 2: add a date picker widget
         widgets = {
@@ -21,6 +21,18 @@ class StoryForm(ModelForm):
                 'type':'date', }),
             'image_field':forms.URLInput(attrs={'class':'form-control'},),
             }
+
+#COMMENT
+#https://djangocentral.com/creating-comments-system-with-django/
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['commenter_name', 'comment_email', 'comment_body']
+        labels = {
+            'commenter_name':('Name'), 
+            'comment_email': ('Email'), 
+            'comment_body':('Write your Comment'),
+        }
 
 # -----------------------------------------------------------------------------
 
