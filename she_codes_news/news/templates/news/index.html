@@ -16,7 +16,7 @@
     {% else %}
         <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
     {% endif %}
-        <button><a href='#'>Explore Stories</a></button>
+        <button><a href="{% url 'news:allStories' %}">Explore all Stories</a></button>
 
         <h2>Latest News</h2>
 
