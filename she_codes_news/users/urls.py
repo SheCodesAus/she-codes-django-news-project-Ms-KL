@@ -6,6 +6,9 @@ app_name = 'users'
 urlpatterns = [
     path('create-account/', CreateAccountView.as_view(),
     name='createAccount'),
-    path('view-account/', AccountView.as_view(), 
-    name='account')
+    # path('view-account/', AccountView.as_view(), 
+    # name='account')
+    path('<int:pk>', AccountView.as_view(), name='profile')
 ]
+
+# ID PK to identify individual users
