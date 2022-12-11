@@ -1,8 +1,9 @@
 from django.views import generic
 from django.urls import reverse_lazy #added
-from .models import NewsStory
+from news.models import NewsStory #added
 from .forms import StoryForm, CommentForm #added
 from django.shortcuts import render, get_object_or_404 #added
+from users.models import CustomUser #added
 
 
 
@@ -30,34 +31,54 @@ class IndexView(generic.ListView):
 # -----------------------
 # ADD EXPLORE STORIES
 class ExploreView(generic.ListView):
+    model = CustomUser
     template_name = 'news/exploreStories.html'
 
     def get_queryset(self):
         '''Return all news stories.'''
         return NewsStory.objects.all()
+    
+    def get_queryset(self):
+        '''Return all authors of stories.'''
+        return CustomUser.objects.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # ---- ASSIGNMENT PART 1: Order the stories by date
         context['all_stories'] = NewsStory.objects.all().order_by('-pub_date')
+        context['story_authors'] = CustomUser.objects.all()
         return context
 
+# class ExploreView(generic.ListView):
+#     template_name = 'news/exploreStories.html'
 
+#     def get_queryset(self):
+#         '''Return all news stories.'''
+#         return NewsStory.objects.all()
 
-# -----------------------
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         # ---- ASSIGNMENT PART 1: Order the stories by date
+#         context['all_stories'] = NewsStory.objects.all().order_by('-pub_date')
+#         return context
+
+    
+
+# ----------------------
+
     # AUTHOR CHOICE -HELP!!! (part of explore stories page)
     # https://www.youtube.com/watch?v=xNV4GFgRCUE
 
-    def story_dropdown(request):
-        displayauthor =NewsStory.objects.values_list('author',flat=True)
-        # looks as NewsStory objects, puts the authors in a list to use
-        return render(request, 'news/exploreStories.html',{"NewsStory":displayauthor})
-        # returns a request to render displayauthor (author list from NewsStory) to explorestories.html 
+    # def story_dropdown(request):
+    #     displayauthor =NewsStory.objects.values_list('author',flat=True)
+    #     # looks as NewsStory objects, puts the authors in a list to use
+    #     return render(request, 'news/exploreStories.html',{"NewsStory":displayauthor})
+    #     # returns a request to render displayauthor (author list from NewsStory) to explorestories.html 
     
-    def author_view(request):
-        if request.method == 'POST':
-            selected_author = request.POST['author']
-        # Do something with the selected author...
+    # def author_view(request):
+    #     if request.method == 'POST':
+    #         selected_author = request.POST['author']
+    #     # Do something with the selected author...
 
 
 
