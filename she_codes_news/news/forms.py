@@ -22,12 +22,13 @@ class StoryForm(ModelForm):
             'image_field':forms.URLInput(attrs={'class':'form-control'},),
             }
 
-#COMMENT
+# comment - HELP!!!!
 #https://djangocentral.com/creating-comments-system-with-django/
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['commenter_name', 'comment_email', 'comment_body']
+        fields = ('commenter_name', 'comment_email', 'comment_body')
         labels = {
             'commenter_name':('Name'), 
             'comment_email': ('Email'), 

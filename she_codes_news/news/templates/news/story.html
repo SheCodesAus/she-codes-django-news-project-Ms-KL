@@ -16,13 +16,15 @@
         {{ story.content|linebreaks }}
     </div>
 </div>
+{% endblock %}
 
-<!-- Comment -->
+<!-- Comment HELP!!!! -->
 <!-- https://djangocentral.com/creating-comments-system-with-django/ -->
-{% for comment in comments %}
+
+<!-- {% for comment in comments %}
 <div>
     <p>
-    {{ comment.comment_name }}
+    {{ comment.commenter_name }}
     <span>
     {{ comment.comment_created_on }}
     </span>
@@ -37,9 +39,9 @@
         </div>
     {% else %}
         <h3>Leave a comment</h3>
-        <form action="" method="post">
-        {% csrf_token %}
-        <table id="form_table">
+        <form action="" method="post"> -->
+        <!-- {% csrf_token %} -->
+        <!-- <table id="form_table">
             {{ comment_form.as_table }}
         </table>
         <input type="submit" value="submit">
@@ -49,9 +51,9 @@
 
 
 
-{% endblock %}
 
-<!-- KG: 
+
+ KG: 
 Displays one specific story 
 Update folder of placeholder photos. 
 Update placeholder.

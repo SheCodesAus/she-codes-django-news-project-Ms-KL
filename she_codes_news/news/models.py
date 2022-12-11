@@ -17,7 +17,7 @@ class NewsStory(models.Model):
     def __str__(self):
         return self.title
 
-# COMMENTS
+# comment - HELP!!!!
 # https://djangocentral.com/creating-comments-system-with-django/
 class Comment(models.Model):
     comment_post = models.ForeignKey(NewsStory,on_delete=models.CASCADE,related_name='comments')

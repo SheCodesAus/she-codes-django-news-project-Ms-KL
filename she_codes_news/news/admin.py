@@ -17,7 +17,7 @@ class NewsStoryAdmin(admin.ModelAdmin):
 
 admin.site.register(NewsStory, NewsStoryAdmin)
 
-# COMMENT
+# COMMENT HELP
 # https://djangocentral.com/creating-comments-system-with-django/
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
