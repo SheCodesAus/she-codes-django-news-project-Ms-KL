@@ -9,8 +9,14 @@
 
     {% block content %}
 
+
+    {% if request.user.is_authenticated %}
         <!-- FORMS SETUP Step 2: Add a link to the form from the home page -->
-        <a href="{% url 'news:newStory' %}">Write New Story</a>
+        <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
+    {% else %}
+        <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
+    {% endif %}
+        <button><a href='#'>Explore Stories</a></button>
 
         <h2>Latest News</h2>
 
