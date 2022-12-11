@@ -1,6 +1,11 @@
 from django import forms
 from django.forms import ModelForm
 from .models import NewsStory, Comment
+# from users.models import CustomUser
+
+
+
+
 class StoryForm(ModelForm):
     class Meta:
         model = NewsStory
@@ -22,8 +27,22 @@ class StoryForm(ModelForm):
             'image_field':forms.URLInput(attrs={'class':'form-control'},),
             }
 
+
+
+
+# Author Dropdown box
+# https://www.youtube.com/watch?v=0x0pWrm2nKI
+# class AuthorForm (forms.Form):
+#     customuser = forms.ModelChoiceField(queryset=CustomUser.objects.all()
+#     )
+
+# -------------------------
+
 # comment - HELP!!!!
 #https://djangocentral.com/creating-comments-system-with-django/
+
+
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
