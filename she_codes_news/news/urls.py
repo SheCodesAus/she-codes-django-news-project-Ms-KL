@@ -10,6 +10,5 @@ urlpatterns = [
     # FORMS SETUP Step 1: add form to the urls
     # What are we supposed to enter for the data? 
     # We’ll fix that using a widget in the next step.
-    path('add-story/', views.AddStoryView.as_view(), name='newStory')
-    
+    path('add-story/', views.AddStoryView.as_view(), name='newStory'),
 ]
