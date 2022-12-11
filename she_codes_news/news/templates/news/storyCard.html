@@ -2,11 +2,12 @@
     <!-- NEWS SETUP Step 14: 
         Link from a story card on news page to the individual story page -->
     <a href="{% url 'news:story' story.id %}">
-        {% if position < 5 %}
+        <!-- % if position < 5 % -->
+        {% if story.image_field %}
             <!-- <img src="../static/news/images/placeholder-{{ position }}.jpg"> -->
             <img src="{{ story.image_field }}">
         {% else %}
-            <img src="{{ story.image_field }}">
+            <img src="https://ms-kl.github.io/images/shecodes-icon.png">
         {% endif %}
         <div class="story-card-text">
             <h3>{{ story.title }}</h3>
