@@ -10,12 +10,28 @@ class NewsStory(models.Model):
     ) #ADDED
     pub_date = models.DateTimeField()
     content = models.TextField()
-    image_field = models.URLField(default='https://ms-kl.github.io/images/shecodes-icon.png') #ADDED
+    image_field = models.URLField(blank=True) #ADDED
+    # default='https://ms-kl.github.io/images/shecodes-icon.png'
 
     # define to blog list in admin portal
     def __str__(self):
         return self.title
 
+# COMMENTS
+# https://djangocentral.com/creating-comments-system-with-django/
+class Comment(models.Model):
+    comment_post = models.ForeignKey(NewsStory,on_delete=models.CASCADE,related_name='comments')
+    commenter_name = models.CharField(max_length=80)
+    comment_email = models.EmailField()
+    comment_body = models.TextField()
+    comment_created_on = models.DateTimeField(auto_now_add=True)
+    comment_active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['comment_created_on']
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.comment_body, self.commenter_name)
 
 # -----------------------------------------------------------------------------
 
