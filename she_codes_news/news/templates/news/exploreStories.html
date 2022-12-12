@@ -1,23 +1,20 @@
     {% extends "base.html" %}
+
     {% load static %}
     {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
     {% endblock %}
 
-
     {% block content %}
 
+    <!-- WRITE NEW STORY BLOCK W/ LOGIN PROMPT -->
     {% if request.user.is_authenticated %}
-        <!-- FORMS SETUP Step 2: Add a link to the form from the home page -->
         <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
     {% else %}
         <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
     {% endif %}
 
-
-
-<!-- ------------------------------- -->
-<!-- AUTHOR NEW APPROACH -->
+    <!-- AUTHOR BLOCK -->
     <h2>Read Author's Work</h2>
         <div id="all-authors">
             {% if story_authors %}
@@ -29,31 +26,7 @@
             {% endif %}
         </div>
 
-        <!-- AUTHOR HELP -->
-        <!-- <form action="" method="POST">
-            {% csrf_token %}
-            {{ form }}
-            <button type="submit">Filter</button>
-        </form> -->
-
-
-
-        <!-- https://www.youtube.com/watch?v=0x0pWrm2nKI -->
-        <!-- <form method="POST">
-            {% csrf_token %}
-            <select name="author">
-                {% for author in displayauthor %}
-                    from story_dropdown function in views -->
-                    <!-- <option value="{{ author }}">{{ author }}</option> -->
-                    <!-- put the author values from the author list as options -->
-                <!-- {% endfor %}
-            </select>
-            <button type="submit">Filter by Author</button>
-        </form> -->
-
-        
-
-<!-- ------------------------------- -->
+    <!-- EXPLORE ALL STORIES BLOCK -->
     <h2>Explore All Stories</h2>
 
     <div id="all-stories">
@@ -68,10 +41,50 @@
 
     {% endblock %} 
 
+<!-- 
+    FUNCTION:
+    This page is viewed when the link "explore all stories" is clicked from the news page and goes to: news/explore-all-stories/
+    This page displays clickable links to authors of the websites. This link leads to each individual author's profile page, which lists their stories and information.
+    This page also displays a list of all stories in reverse chronological order.
+    This page has a button that says "write new story" (if user is logged in) and goes to: news/add-story/
+    The link above says "Login to Write a New Story" if user is not logged in. If link is clicked, will be requested to login.
+    If a user who is not logged in navigates to the url directly (/news/add-story/), they will see a "Login to Write new story" button.
 
+    ASSIGNMENT:
+    This page is an optional "additional feature"
+    This page satisfies Part 1: 
+    - "Order the stories by date"
+    This page satisfies Part 2: 
+    - "View stories by a particular author"
+    - "Show/Hide the relevant information and buttons based on whether to user is logged in/out"
+    - "Enable/Disable the relevant features based on whether the user is logged in/out"
 
+    REFERENCES:
+    - https://www.youtube.com/watch?v=0x0pWrm2nKI
 
+    ALTERNATIVE SOLUTIONS:
+    {% comment %}
 
-            <!-- NOTE -->
-        <!-- How to get all news stories into the page: 
-        if there are stories, loop through and list them -->
+        ALTERNATIVE 1: AUTHOR BLOCK
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Filter</button>
+        </form>
+
+        ALTERNATIVE 2: AUTHOR BLOCK
+        <form method="POST">
+            {% csrf_token %}
+            <select name="author">
+                {% for author in displayauthor %}
+                    from story_dropdown function in views -->
+                    <!-- <option value="{{ author }}">{{ author }}</option> -->
+                    <!-- put the author values from the author list as options -->
+                <!-- {% endfor %}
+            </select>
+            <button type="submit">Filter by Author</button>
+        </form> 
+
+    {% endcomment %}
+    -->
+
