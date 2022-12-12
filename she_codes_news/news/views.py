@@ -1,7 +1,7 @@
 from django.views import generic
 from django.urls import reverse_lazy #added
 from news.models import NewsStory #added
-from .forms import StoryForm, CommentForm #added
+from .forms import StoryForm, CommentForm
 from django.shortcuts import render, get_object_or_404 #added
 from users.models import CustomUser #added
 
@@ -89,6 +89,12 @@ class StoryView(generic.DetailView):
     model = NewsStory
     template_name = 'news/story.html'
     context_object_name = 'story'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = CommentForm()
+        context["form_action"] = reverse_lazy("news:addComment", kwargs={"pk": self.kwargs.get('pk')})
+        return context
     
     # comment - HELP!!!!
     # def post_detail(request, slug):
@@ -134,6 +140,22 @@ class AddStoryView(generic.CreateView):
 
 
 # -----------------------
+
+class AddCommentView(generic.CreateView):
+    form_class = CommentForm
+    success_url = reverse_lazy("news:newsStory")
+    template_name = 'news/createComment.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        pk = self.kwargs.get("pk")
+        story = get_object_or_404(NewsStory, pk=pk)
+        form.instance.story = story
+        return super().form_valid(form)
+    
+    def get_success_url(self) -> str:
+        pk = self.kwargs.get("pk")
+        return reverse_lazy("news:story", kwargs={"pk":pk})
 
 # add comments
 # def post_detail(request, slug):
