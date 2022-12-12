@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+
 {% load static %}
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
 {% endblock %}
+
 {% block content %}
 
+<!-- CREATE STORY BLOCK W/ LOGIN PROMPT -->
 {% if request.user.is_authenticated %}
     <form action="" method="post">
         {% csrf_token %}
@@ -19,53 +22,49 @@
 
 {% endblock %}
 
+
 <!-- 
+    FUNCTION:
+    This page is viewed when the link "write new story" is clicked from the news page and goes to: news/add-story/
+    This page is only visible to logged in users. The link above says "Login to Write a New Story" if user is not logged in.
+    If link is clicked, will be requested to login.
+    If a user who is not logged in navigates to the url directly (/news/add-story/), they will see a "Login to Write new story" button.
 
------------------------------------------------------------------------------ 
+    ASSIGNMENT:
+    This is part of the "Creating a form" setup.
+    This page satisfies Part 1: 
+    - "Style the form for adding new stories"
+    - "Add a field to the NewsStory model for an image url and use this image rather than the default images provided by the starter"
+    This page satisfies Part 2: 
+    - "Show/Hide the relevant information and buttons based on whether to user is logged in/out"
+    - "Enable/Disable the relevant features based on whether the user is logged in/out"
 
-__ THIS IS A FORM TO SUBMIT A NEW STORY
-__ FORMS SETUP Step 1: fill in the template - DONE
+    ALTERNATE SOLUTIONS:
+    {% comment %}
 
-------------------------
-
-__ ASSIGNMENT PART 1: Style the form for adding new stories.
-    KG DO: 
-    - load static and css block - DONE
-    - format form as table - DONE
-    - set ID to access in CSS - DONE
-
-------------------------
-    
-__ REFERENCES:
-    - https://colinkingswood.github.io/Model-Form-Customisation/
-
-------------------------
-
-__ ORIGINAL CODE TO CHANGE: * remove -
-    {-% extends "base.html" %-}
-    {-% block content %-}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-    <input type="submit" value="submit">
-    </form>
-    {-% endblock %-}
-
-------------------------
-
-__ KG REJECTED ALTERNATIVE APPROACHES 
-    <div id="new_story_form">
-        <form action="" method="post">
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="story-line">
-                {{ field.label }} {{ field }}
-            </div>
-            {% endfor %}
+        OG PROJECT SETUP CODE: 
+            {% extends "base.html" %}
+            {% block content %-}
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
             <input type="submit" value="submit">
-        </form>
-    </div> 
+            </form>
+            {-% endblock %}
 
+        ALTERNATIVE 1:
+            <div id="new_story_form">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="story-line">
+                        {{ field.label }} {{ field }}
+                    </div>
+                    {% endfor %}
+                    <input type="submit" value="submit">
+                </form>
+            </div> 
+
+    {% endcomment %}
 -->
-
 
