@@ -1,52 +1,60 @@
-    <!-- SETUP NEWS Step 10: use the base in the news app index file -->
     {% extends "base.html" %}
-    {% load static %}
 
-    <!-- SETUP NEWS Step 11: load stylesheet in news app index-->
+    {% load static %}
     {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
     {% endblock %}
 
     {% block content %}
 
-
+    <!-- EXPLORE ALL STORIES LINK + WRITE NEW STORY BLOCK W/ LOGIN PROMPT -->
     {% if request.user.is_authenticated %}
-        <!-- FORMS SETUP Step 2: Add a link to the form from the home page -->
         <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
     {% else %}
         <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
     {% endif %}
         <button><a href="{% url 'news:allStories' %}">Explore all Stories</a></button>
 
+        <!-- LATEST STORIES BLOCK -->
         <h2>Latest News</h2>
-
-        <!-- Index page for news only, not the website -->
-
         <div id="latest-stories">
             {% if latest_stories %}
                 {% for story in latest_stories %}
-                    <!-- SETUP NEWS Step 12: Use story card template -->
                     {% include "./storyCard.html" with story=story position=forloop.counter %}
-                    <!-- <p>{{ story.title }}</p> -->
                 {% endfor %}
             {% else %}
                 <p>No stories are available.</p>
             {% endif %}
         </div>
 
+        <!-- ALL STORIES BLOCK (continues from where latest stories left off)-->
+        <!-- DO: shorten list or axe all together -->
         <div id="all-stories">
             {% if latest_stories %}
                 {% for story in all_stories %}
-                    <!-- SETUP NEWS Step 12: Use story card template -->
                     {% include "./storyCard.html" with story=story %}
-                    <!-- <p>{{ story.title }}</p> -->
                 {% endfor %}
             {% else %}
                 <p>No stories are available.</p>
             {% endif %}
         </div>
 
-            <!-- NOTE -->
-        <!-- How to get all news stories into the page: 
-        if there are stories, loop through and list them -->
     {% endblock %}
+
+<!-- 
+    FUNCTION:
+    This page displays a list of the latest 4 stories in reverse chronological order.
+    This page displays a list of all stories in reverse chronological order (from where the latest stories left off)
+    This page has a button that says "write new story" (if user is logged in) and goes to: news/add-story/
+    The link above says "Login to Write a New Story" if user is not logged in. If link is clicked, will be requested to login.
+    If a user who is not logged in navigates to the url directly (/news/add-story/), they will see a "Login to Write new story" button.
+    This page has a link to "Explore all stories".
+
+    ASSIGNMENT:
+    This page is part of the "News Setup"
+    This page satisfies Part 1: 
+    - "Order the stories by date"
+    This page satisfies Part 2: 
+    - "Show/Hide the relevant information and buttons based on whether to user is logged in/out"
+    - "Enable/Disable the relevant features based on whether the user is logged in/out"
+-->
