@@ -1,10 +1,11 @@
-from django.contrib.auth import get_user_model #ADDED
+from django.contrib.auth import get_user_model
 from django.db import models
 
 USER = get_user_model()
 
 
 # -----------------------
+# NEWSTORY BLOCK
 class NewsStory(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(
@@ -12,15 +13,14 @@ class NewsStory(models.Model):
     )
     pub_date = models.DateTimeField()
     content = models.TextField()
-    image_field = models.URLField(blank=True) #ADDED
-    # default='https://ms-kl.github.io/images/shecodes-icon.png'
+    image_field = models.URLField(blank=True)
 
-    # define to blog list in admin portal
+    # display blog title in admin portal on list
     def __str__(self):
         return self.title
 
 # -----------------------
-# COMMENT
+# COMMENT BLOCK
 # https://youtu.be/SImJVdZocvQ
 class Comment(models.Model):
     story = models.ForeignKey(NewsStory,on_delete=models.CASCADE,related_name='comments')
@@ -34,48 +34,38 @@ class Comment(models.Model):
     def __str__(self):
         return self.story
 
-    # class Meta:
-    #     ordering = ['comment_created_on']
 
-    # def __str__(self):
-    #     return 'Comment {} by {}'.format(self.comment_body, self.commenter_name)
+# -----------------------
+    # FUNCTION:
+    # <INSERT>
 
+    # ASSIGNMENT:
+    # <INSERT>
 
-
-
-
-
-
-# -----------------------------------------------------------------------------
-
-# __ ASSIGNMENT PART 1:
-    # Add a field to the NewsStory model for an image url and 
-    # use this image url rather than the default images provided in the starter
-
-# ---------------------
-
-# __ NOTE: 
-    # Textfield for no max length
-    # properties: title, author, pub_date
+    # REFERENCES:
     # https://docs.djangoproject.com/en/4.0/topics/forms/modelforms/
     # https://docs.djangoproject.com/en/4.0/ref/forms/fields/#imagefield
     # must set default or URL field won't work
+    # Textfield for no max length
 
-# ---------------------
+    # ALTERNATIVE SOLUTIONS:
+    # {% comment %}
 
-# __ ORIGINAL CODE TO CHANGE:
-    # # SETUP USERS Step 10: use the user as the author
-    # from django.contrib.auth import get_user_model
-    # from django.db import models
+        # OG CODE:
+            # # SETUP USERS Step 10: use the user as the author
+            # from django.contrib.auth import get_user_model
+            # from django.db import models
 
-    # class NewsStory(models.Model):
-    #     title = models.CharField(max_length=200)
-    #     # author = models.CharField(max_length=200)
-    #     # SETUP USERS Step 10: use the user as the author
-    #     author = models.ForeignKey(
-    #         get_user_model(),
-    #         # KG: use custom user class we created
-    #         on_delete=models.CASCADE
-    #     )
-    #     pub_date = models.DateTimeField()
-    #     content = models.TextField()
+            # class NewsStory(models.Model):
+            #     title = models.CharField(max_length=200)
+            #     # author = models.CharField(max_length=200)
+            #     # SETUP USERS Step 10: use the user as the author
+            #     author = models.ForeignKey(
+            #         get_user_model(),
+            #         # KG: use custom user class we created
+            #         on_delete=models.CASCADE
+            #     )
+            #     pub_date = models.DateTimeField()
+            #     content = models.TextField()
+
+    # {% endcomment %}

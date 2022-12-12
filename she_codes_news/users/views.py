@@ -1,15 +1,8 @@
-# from django.shortcuts import render
-# # Create your views here.
-
-
-# SETUP USERS Step 9: Create view for the created account page app:
-
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views import generic
 from .models import CustomUser
 from .forms import CustomUserCreationForm
-#added
 from news.models import NewsStory
 
 class CreateAccountView(CreateView):
@@ -28,10 +21,19 @@ class AccountView(generic.DetailView):
 
 
 
+# -----------------------
+    # FUNCTION:
+    # <INSERT>
 
-# ASSIGNMENT PART 2: add an Account View
-# STEPS: add Account view, add account.html, add to model? 
-# class AccountView(CreateView):
-#     form_class = CustomUserCreationForm# unsure what to put
-#     success_url = reverse_lazy('view-account')
-#     template_name = 'users/viewAccount.html'
+    # ASSIGNMENT:
+    # <INSERT>
+
+    # REFERENCES:
+    # <INSERT>
+
+    # ALTERNATIVE SOLUTIONS:
+    # {% comment %}
+
+        # from django.shortcuts import render
+
+    # {% endcomment %}
