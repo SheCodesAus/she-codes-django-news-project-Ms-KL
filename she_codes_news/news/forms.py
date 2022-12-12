@@ -44,15 +44,10 @@ class StoryForm(ModelForm):
 
 
 
-class CommentForm(forms.ModelForm):
+class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('commenter_name', 'comment_email', 'comment_body')
-        labels = {
-            'commenter_name':('Name'), 
-            'comment_email': ('Email'), 
-            'comment_body':('Write your Comment'),
-        }
+        fields = ["content"]
 
 # -----------------------------------------------------------------------------
 
