@@ -85,13 +85,13 @@
     width: 50%;
 }
 
-/* KG: Add own classes */
+/* KRISTY STYLING */
 
 /* ASSIGNMENT PART 1: STYLE THE FORM FOR ADDING NEW STORIES */
     /* From: {{ form.as_table }} inbuilt access to td, label and input */
 
 
-#form_table {
+.form_table {
     text-align: left;
 }
 
