@@ -1,61 +1,112 @@
-<!-- NEWS SETUP Step 13: Style the story page -->
 {% extends "base.html" %}
+
 {% load static %}
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
 {% endblock %}
+
 {% block content %}
 
+<!-- STORY BLOCK -->
+<!-- DO: add clickable author link-->
 <div id="story-wrapper">
     <h2>{{ story.title }}</h2>
     <div id="story-content">
-        <!-- <img src="{% static '/news/images/placeholder-5.jpg' %}"> -->
-        <!-- <img src="{% static '/news/images/ollie.jpg' %}"> -->
         <img src="{{ story.image_field }}">
         <h4>Published by {{ story.author }} - {{ story.pub_date }}</h4>
         {{ story.content|linebreaks }}
     </div>
-
 </div>
+
+<!-- ADD COMMENT BLOCK -->
+    <div id="comment-wrapper">
+        {% if request.user.is_authenticated %}
+        <div>
+            <form method="POST" action="{{ form_action }}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Add Comment</button>
+            </form>
+        </div>
+        <p><a href="{% url 'news:addComment' story.id %}">Add a Comment</a></p>
+        {% else %}
+            <button><a href="{% url 'login' %}">Login to Add a Comment</a></button>
+        {% endif %}
+
+<!-- EXISTING COMMENT BLOCK -->
+<!-- DO: add clickable author link-->
+    <ul>
+    {% for comment in story.comments.all %}
+        <li>{{ comment.author.username }} ({{comment.created_at}}): {{ comment.content }}</li>
+    {% endfor %}
+    </ul>
+</div>
+
 {% endblock %}
 
-<!-- Comment HELP!!!! -->
-<!-- https://djangocentral.com/creating-comments-system-with-django/ -->
+<!-- 
+    FUNCTION:
+    This page is viewed when an individual story is clicked from the index.html (news) page or if the story link is directly accessed.
+    This page displays a single story, the author, date posted, title of story, story image, comment form and comment history.
+    This page has a text field and button that says "Add Comment" (if user is logged in), which posts comments to the page.
+    The link above says "Login to Add Comment" if user is not logged in. If link is clicked, will be requested to login.
 
-<!-- {% for comment in comments %}
-<div>
-    <p>
-    {{ comment.commenter_name }}
-    <span>
-    {{ comment.comment_created_on }}
-    </span>
-</p>
-{{ comment.body | linebreaks }}
-</div>
-{% endfor %}
-<div>
-    {% if new_comment %}
-        <div class="alert alert-success" role="alert">
-        Your comment is awaiting moderation
+    ASSIGNMENT:
+    This page is part of the "News Setup"
+    This page contains optional "additional features": 
+    - Submit comments
+    - View comments
+    This page satisfies Part 2: 
+    - "Show/Hide the relevant information and buttons based on whether to user is logged in/out"
+    - "Enable/Disable the relevant features based on whether the user is logged in/out"
+
+    REFERENCES:
+    - https://www.youtube.com/watch?v=SImJVdZocvQ
+    - https://djangocentral.com/creating-comments-system-with-django/
+
+    ALTERNATIVE SOLUTIONS:
+    {% comment %}
+
+        ALTERNATIVE 1: STORY BLOCK
+        <div id="story-wrapper">
+            <h2>{{ story.title }}</h2>
+            <div id="story-content">
+                <img src="{% static '/news/images/placeholder-5.jpg' %}">
+
+                <h4>Published by {{ story.author }} - {{ story.pub_date }}</h4>
+                {{ story.content|linebreaks }}
+            </div>
         </div>
-    {% else %}
-        <h3>Leave a comment</h3>
-        <form action="" method="post"> -->
-        <!-- {% csrf_token %} -->
-        <!-- <table id="form_table">
-            {{ comment_form.as_table }}
-        </table>
-        <input type="submit" value="submit">
-        </form>
-    {% endif %}
-</div>
 
+        ALTERNATIVE 1: COMMENT BLOCK
+        {% for comment in comments %}
+        <div>
+            <p>
+            {{ comment.commenter_name }}
+            <span>
+            {{ comment.comment_created_on }}
+            </span>
+            </p>
+            {{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
+        <div>
+            {% if new_comment %}
+                <div class="alert alert-success" role="alert">
+                    Your comment is awaiting moderation
+                </div>
+            {% else %}
+                <h3>Leave a comment</h3>
+                <form action="" method="post">
+                {% csrf_token %}
+                <table id="form_table">
+                    {{ comment_form.as_table }}
+                </table>
+                <input type="submit" value="submit">
+                </form>
+            {% endif %}
+        </div>
 
-
-
-
- KG: 
-Displays one specific story 
-Update folder of placeholder photos. 
-Update placeholder.
+    {% endcomment %}
 -->
+
