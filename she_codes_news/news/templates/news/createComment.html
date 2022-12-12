@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- COMMENT BLOCK -->
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="submit">
+</form>
+
+{% endblock %}
+
+<!-- 
+    FUNCTION:
+    This creates a comment form to be embedded into story.html
+    This can also be used as a stand-alone url 
+
+    ASSIGNMENT:
+    This is an optional "additional feature"
+
+    REFERENCE:
+    https://www.youtube.com/watch?v=SImJVdZocvQ
+-->
