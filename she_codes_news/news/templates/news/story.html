@@ -21,6 +21,7 @@
 <!-- ADD COMMENT BLOCK -->
     <div id="comment-wrapper">
         {% if request.user.is_authenticated %}
+        <p><a href="{% url 'news:addComment' story.id %}">Add a Comment</a></p>
         <div>
             <form method="POST" action="{{ form_action }}">
                 {% csrf_token %}
@@ -28,7 +29,6 @@
                 <button type="submit">Add Comment</button>
             </form>
         </div>
-        <p><a href="{% url 'news:addComment' story.id %}">Add a Comment</a></p>
         {% else %}
             <button><a href="{% url 'login' %}">Login to Add a Comment</a></button>
         {% endif %}
