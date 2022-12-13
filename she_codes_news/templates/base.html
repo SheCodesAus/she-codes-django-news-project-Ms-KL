@@ -11,8 +11,8 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>She Codes News</title>
-        <meta name="description" content="">
+        <title>She Codes Pet Post</title>
+        <meta name="description" content="She Codes Pet Post">
         <meta name="author" content="Kristy Gray">
         <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
         <!-- SETUP NEWS Step 10: update directories for templates and static files -->
@@ -25,7 +25,8 @@
         <header>
             <div id="header-text">
                 <a id="header-link" href="{% url 'news:index' %}">
-                    <h1>She {Codes} News</h1>
+                    <img src="{% static '/images/logo.png' %}" />
+                    <!-- <h1>She {Codes} News</h1> -->
                 </a>
             </div>
             <!-- SETUP NEWS Step 15: Include nav template in base template-->
