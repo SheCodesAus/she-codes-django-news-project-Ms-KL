@@ -7,16 +7,19 @@
 
     {% block content %}
 
-    <!-- EXPLORE ALL STORIES LINK + WRITE NEW STORY BLOCK W/ LOGIN PROMPT -->
-    {% if request.user.is_authenticated %}
-        <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
-    {% else %}
-        <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
-    {% endif %}
-        <button><a href="{% url 'news:allStories' %}">Explore all Stories</a></button>
+    <section>
+        <div class="hero">
+            <h2>Latest News</h2>
+            <!-- EXPLORE ALL STORIES LINK + WRITE NEW STORY BLOCK W/ LOGIN PROMPT -->
+            {% if request.user.is_authenticated %}
+            <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
+            {% else %}
+            <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
+            {% endif %}
+            <button><a href="{% url 'news:allStories' %}">Explore all Stories</a></button>
+        </div>
 
         <!-- LATEST STORIES BLOCK -->
-        <h2>Latest News</h2>
         <div id="latest-stories">
             {% if latest_stories %}
                 {% for story in latest_stories %}
@@ -26,18 +29,7 @@
                 <p>No stories are available.</p>
             {% endif %}
         </div>
-
-        <!-- ALL STORIES BLOCK (continues from where latest stories left off)-->
-        <!-- DO: shorten list or axe all together -->
-        <div id="all-stories">
-            {% if latest_stories %}
-                {% for story in all_stories %}
-                    {% include "./storyCard.html" with story=story %}
-                {% endfor %}
-            {% else %}
-                <p>No stories are available.</p>
-            {% endif %}
-        </div>
+    </section>
 
     {% endblock %}
 
@@ -57,4 +49,18 @@
     This page satisfies Part 2: 
     - "Show/Hide the relevant information and buttons based on whether to user is logged in/out"
     - "Enable/Disable the relevant features based on whether the user is logged in/out"
+
+    ALTERNATIVES:
+
+        ALL STORIES BLOCK (continues from where latest stories left off)
+        MOVED to Explore Stories Page
+        <div id="all-stories">
+            {% if latest_stories %}
+                {% for story in all_stories %}
+                    {% include "./storyCard.html" with story=story %}
+                {% endfor %}
+            {% else %}
+                <p>No stories are available.</p>
+            {% endif %}
+        </div>
 -->
