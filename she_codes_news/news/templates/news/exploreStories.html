@@ -7,27 +7,30 @@
 
     {% block content %}
 
-    <!-- WRITE NEW STORY BLOCK W/ LOGIN PROMPT -->
-    {% if request.user.is_authenticated %}
-        <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
-    {% else %}
-        <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
-    {% endif %}
-
-    <!-- AUTHOR BLOCK -->
-    <h2>Read Author's Work</h2>
-        <div id="all-authors">
-            {% if story_authors %}
-                {% for author in story_authors %}
-                    <p><a href="{% url 'users:profile' author.id %}">{{ author }}</a></p>
-                {% endfor %}
+    <section>
+        <div class="hero">
+            <!-- EXPLORE ALL STORIES BLOCK -->
+            <h2>Explore All Stories</h2>
+            <!-- AUTHOR BLOCK -->                
+            <div id="all-authors">
+                {% if story_authors %}
+                |
+                    {% for author in story_authors %}
+                        <a href="{% url 'users:profile' author.id %}">{{ author }}</a> |
+                    {% endfor %}
+                {% else %}
+                    <p>No authors are available.</p>
+                    <br>
+                {% endif %}
+            </div>
+        <!-- WRITE NEW STORY BLOCK W/ LOGIN PROMPT -->
+            {% if request.user.is_authenticated %}
+            <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
             {% else %}
-                <p>No authors are available.</p>
+            <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
             {% endif %}
         </div>
-
-    <!-- EXPLORE ALL STORIES BLOCK -->
-    <h2>Explore All Stories</h2>
+    </section>
 
     <div id="all-stories">
         {% if all_stories %}
