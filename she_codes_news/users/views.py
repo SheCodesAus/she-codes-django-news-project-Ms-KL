@@ -29,7 +29,13 @@ class AccountView(generic.DetailView):
     # <INSERT>
 
     # REFERENCES:
-    # <INSERT>
+    # Which Django generic to use for which job?
+        # generic.ListView for when you want to see all (or a subset) of a models data
+        # generic.DetailView for when you want one specific item from a model
+        # edits
+        # generic.edit.CreateView for when you want to create a new item in a model
+        # generic.edit.UpdateView for when you want to modify one specific item from a model
+        # generic.edit.DeleteView for when you want to remove one specific item from a model
 
     # ALTERNATIVE SOLUTIONS:
     # {% comment %}
