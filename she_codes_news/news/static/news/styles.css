@@ -1,13 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700;900&display=swap');
 .story-card {
-    margin: 2px;
-    border: 1px solid #000;
-    padding: 5px;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid grey;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 4px 5px 0 lightgray,0px 6px 20px 0 lightgray;
 }
 
 .story-card img {
     width: 100%;
     height: 300px;
     object-fit: cover;
+    border-radius: 5px;
 }
 
 #latest-stories {
@@ -16,7 +21,7 @@
     grid-template-rows: 1fr 1fr 1fr;
     gap: 1px 1px;
     grid-template-areas: "left-1 right-1" "left-1 right-2" "left-1 right-3";
-    max-height: 500px;
+    max-height: 575px;
 }
 
 #story-card-1 {
@@ -53,15 +58,15 @@
 #story-card-2 .story-card-text h4,
 #story-card-3 .story-card-text h4,
 #story-card-4 .story-card-text h4 {
-    font-size: 12px;
+    font-size: 13px;
 }
 
 #story-card-2 img,
 #story-card-3 img,
 #story-card-4 img {
-    width: 33%;
+    width: 50%;
     height: 100%;
-    margin-right: 5px;
+    margin-right: 30px;
 }
 
 #all-stories {
@@ -81,8 +86,10 @@
 
 #story-content img {
     float: right;
-    margin: 0 0 10px 10px;
+    margin: 0 0 10px 50px;
     width: 50%;
+    border-radius: 15px;
+    box-shadow: 0px 4px 5px 0 lightgray,0px 6px 20px 0 lightgray;
 }
 
 /* KRISTY STYLING */
@@ -101,4 +108,27 @@ label {
 
 .form-control {
     width: 95%;
+}
+
+/* button {
+    padding: 5px;
+    margin: auto;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    font-size: .9rem;
+    background-color: #8246AF;
+    box-shadow: 0px 4px 5px 0 lightgray,0px 6px 20px 0 lightgray;
+}
+
+button a {
+    color: white;
+}
+
+button:hover {
+    background-color: #F9A325;
+}
+
+button a:hover {
+    color: white; */
 }
