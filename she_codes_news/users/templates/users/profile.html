@@ -9,17 +9,19 @@
 {% block content %}
 <main>
 
-    <button><a href="{% url 'news:allStories' %}">Explore Stories by All Authors</a></button>
+    <button><a href="{% url 'news:allStories' %}">Explore Stories by All Authors</a></button>         
+    {% if request.user.is_authenticated %}
+        {% if request.user.id == user.id %}
+        <button><a href="{% url 'users:changePassword' %}">Change Password</a></button>
+        {% endif %}
+    {% else %}
+    {% endif %}
 
     <div id="account-wrapper">
         <h2>{{ user.username }}'s Account:</h2>
         <ul>
             <li><b>Username:</b> {{ user.username }}</li>
             <li><b>Email:</b> {{ user.email }}</li>
-            {% if request.user.is_authenticated %}
-                <button><a href="{% url 'users:changePassword' %}">Change Password</a></button>
-            {% else %}
-            {% endif %}
         </ul>
         <br>
     </div>
