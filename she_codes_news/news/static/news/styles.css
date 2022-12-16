@@ -110,22 +110,12 @@ label {
     width: 95%;
 }
 
-ul {
-    list-style-type: none;
+#doggo_img_else {
+    display: block;
+    max-width: 250px;
+    max-height: 250px;
+    transform: scaleX(-1);
 }
-
-ul li:before {
-    content: '';
-    display: inline-block;
-    height: 10px;
-    width: 10px;
-    background-size: 10px;
-    background-image: url(images/bullet.png);
-    background-repeat: no-repeat;
-    margin-right: 5px;
-}
-
-
 
 /* button {
     padding: 5px;

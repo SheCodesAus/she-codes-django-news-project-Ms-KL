@@ -166,3 +166,18 @@ th {
     padding-right: 20px;
     vertical-align: text-top;
 }
+
+ul {
+    list-style-type: none;
+}
+
+ul li:before {
+    content: '';
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-size: 10px;
+    background-image: url(images/bullet.png);
+    background-repeat: no-repeat;
+    margin-right: 5px;
+}

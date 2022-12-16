@@ -111,15 +111,14 @@ class EditStoryView(generic.UpdateView):
         pk = self.kwargs.get("pk")
         return reverse_lazy("news:story", kwargs={"pk":pk})
 
-
+# -----------------------
+# DELETESTORY BLOCK
 
 class DeleteStoryView(generic.DeleteView):
     model = NewsStory
     context_object_name = 'story'
     template_name = 'news/deleteStory.html'
     success_url = reverse_lazy('news:index')
-
-
 
 # -----------------------
     # FUNCTION:

@@ -8,8 +8,9 @@
     {% block content %}
     
     <main>
+
         <div class="hero">
-            <!-- EXPLORE ALL STORIES BLOCK -->
+                <!-- EXPLORE ALL STORIES BLOCK -->
             <h2>Explore All Stories</h2>
             <!-- AUTHOR BLOCK -->                
             <div id="all-authors">
@@ -22,7 +23,10 @@
                     <p>No authors are available.</p>
                     <br>
                 {% endif %}
+                <br>
+                <br>
             </div>
+
         <!-- WRITE NEW STORY BLOCK W/ LOGIN PROMPT -->
             {% if request.user.is_authenticated %}
             <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
@@ -68,7 +72,48 @@
     ALTERNATIVE SOLUTIONS:
     {% comment %}
 
-        ALTERNATIVE 1: AUTHOR BLOCK
+        -------------- 
+
+        ** fave: PRINT LIST OF NAMES USING LOOP, WHICH CLICKS THROUGH TO THEIR PROFILE
+            <div class="hero"> -->
+            <!-- EXPLORE ALL STORIES BLOCK -->
+            <!-- <h2>Explore All Stories</h2> -->
+            <!-- AUTHOR BLOCK -->                
+            <!-- <div id="all-authors">
+                {% if story_authors %}
+                |
+                    {% for author in story_authors %}
+                        <a href="{% url 'users:profile' author.id %}">{{ author }}</a> |
+                    {% endfor %}
+                {% else %}
+                    <p>No authors are available.</p>
+                    <br>
+                {% endif %}
+            </div> -->
+            <!-- --------------- -->
+
+
+
+<!-- CANT USE: JAVASCRIPT due to onchange                 -->
+            <!-- <div id="all-authors">
+                {% if story_authors %}
+                <label for="authors">Filter by author:</label>
+
+                <select name="authors" onchange="location = this.value;" id="author">
+                    <option value="{% url 'news:allStories' %}">-- Filter by Author --</option>
+                    {% for author in story_authors %}
+                    <option value="{% url 'users:profile' author.id %}">{{ author }}</option>
+                    {% endfor %}
+                </select>
+                {% else %}
+                    <p>No authors are available.</p>
+                    <br>
+                {% endif %}
+            </div> -->
+
+
+             <!-- --------------- -->
+        <!-- ALTERNATIVE 1: AUTHOR BLOCK
         <form action="" method="POST">
             {% csrf_token %}
             {{ form }}
@@ -80,7 +125,7 @@
             {% csrf_token %}
             <select name="author">
                 {% for author in displayauthor %}
-                    from story_dropdown function in views -->
+                    from story_dropdown function in views  -->
                     <!-- <option value="{{ author }}">{{ author }}</option> -->
                     <!-- put the author values from the author list as options -->
                 <!-- {% endfor %}

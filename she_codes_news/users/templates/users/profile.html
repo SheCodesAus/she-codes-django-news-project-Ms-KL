@@ -9,13 +9,23 @@
 {% block content %}
 <main>
 
+    <button><a href="{% url 'news:allStories' %}">Explore Stories by All Authors</a></button>
+
     <div id="account-wrapper">
         <h2>{{ user.username }}'s Account:</h2>
-        <p><b>Email:</b> {{ user.email }}</p>
-        <!-- insert list of stories by author -->
+        <ul>
+            <li><b>Username:</b> {{ user.username }}</li>
+            <li><b>Email:</b> {{ user.email }}</li>
+            {% if request.user.is_authenticated %}
+                <button><a href="{% url 'users:changePassword' %}">Change Password</a></button>
+            {% else %}
+            {% endif %}
+        </ul>
+        <br>
     </div>
 
     <div id="user-stories">
+        <h3>{{ user.username }}'s Stories:</h3>
         {% if user_stories %}
             {% for story in user_stories %}
                 <!-- SETUP NEWS Step 12: Use story card template -->

@@ -33,6 +33,8 @@ class CommentForm(ModelForm):
         model = Comment
         fields = ["content"]
 
+
+
 # -----------------------
     # FUNCTION:
     # <INSERT>
