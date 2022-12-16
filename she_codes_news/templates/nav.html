@@ -8,6 +8,10 @@
     <a href="{% url 'users:profile' request.user.id %}">{{ request.user.username }}</a>
         <!-- <a href="users/view-account/">{{ user.username }}</a>
         HELP! -->
+        {% if request.user.is_superuser %}
+            <a href="/admin/">Admin</a>
+        {% else %}
+        {% endif %}
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
         <a href="{% url 'login' %}">Login</a>
