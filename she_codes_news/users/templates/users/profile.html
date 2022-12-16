@@ -7,23 +7,25 @@
 <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 {% endblock %}
 {% block content %}
+<main>
 
-<div id="account-wrapper">
-    <h2>{{ user.username }}'s Account:</h2>
-    <p><b>Email:</b> {{ user.email }}</p>
-    <!-- insert list of stories by author -->
-</div>
+    <div id="account-wrapper">
+        <h2>{{ user.username }}'s Account:</h2>
+        <p><b>Email:</b> {{ user.email }}</p>
+        <!-- insert list of stories by author -->
+    </div>
 
-<div id="user-stories">
-    {% if user_stories %}
-        {% for story in user_stories %}
-            <!-- SETUP NEWS Step 12: Use story card template -->
-            {% include "news/storyCard.html" with story=story position=forloop.counter %}
-            <!-- <p>{{ story.title }}</p> -->
-        {% endfor %}
-    {% else %}
-        <p>No stories are available.</p>
-    {% endif %}
-</div>
+    <div id="user-stories">
+        {% if user_stories %}
+            {% for story in user_stories %}
+                <!-- SETUP NEWS Step 12: Use story card template -->
+                {% include "news/storyCard.html" with story=story position=forloop.counter %}
+                <!-- <p>{{ story.title }}</p> -->
+            {% endfor %}
+        {% else %}
+            <p>No stories are available.</p>
+        {% endif %}
+    </div>
+</main>
 
 {% endblock %}

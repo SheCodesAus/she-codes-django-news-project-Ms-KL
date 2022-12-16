@@ -110,6 +110,23 @@ label {
     width: 95%;
 }
 
+ul {
+    list-style-type: none;
+}
+
+ul li:before {
+    content: '';
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-size: 10px;
+    background-image: url(images/bullet.png);
+    background-repeat: no-repeat;
+    margin-right: 5px;
+}
+
+
+
 /* button {
     padding: 5px;
     margin: auto;
@@ -131,4 +148,3 @@ button:hover {
 
 button a:hover {
     color: white; */
-}

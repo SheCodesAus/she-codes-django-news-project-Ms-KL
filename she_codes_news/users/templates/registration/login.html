@@ -3,14 +3,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-	{% csrf_token %}
-	{{ form.as_p }}
-	<button type="submit">Login</button>
-	<button><a href="{% url 'users:createAccount' %}">Create a Profile</a></button>
-	
-</form>
+<main>
+	<h2>Login</h2>
+	<form method="post">
+		{% csrf_token %}
+		<table class="form_table">
+		{{ form.as_table }}
+		</table>
+		<br>
+		<button type="submit">Login</button>
+		<button><a href="{% url 'users:createAccount' %}">Create a Profile</a></button>
+	</form>
+</main>
 
 
 {% endblock %}

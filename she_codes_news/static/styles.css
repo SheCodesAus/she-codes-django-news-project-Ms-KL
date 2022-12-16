@@ -17,6 +17,10 @@ header {
     border-bottom: 1px solid #000;
 }
 
+main {
+    margin: 20px;
+}
+
 img {
     /* filter: grayscale(100%); */
 }
@@ -30,9 +34,6 @@ h1 {
 
 h2 {
     font-size: 2.75rem;
-    margin: 20px;
-
-   /* font-family: 'Montserrat Subrayada', sans-serif;  */
 }
 
 h3 {
@@ -54,6 +55,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    margin-right: 20px;
 }
 
 a {
@@ -82,6 +84,7 @@ a:hover {
 button, .submit_button {
     padding: 5px;
     margin: 5px;
+    font-weight: bold;
     text-align: center;
     border-radius: 5px;
     border: none;
@@ -91,6 +94,7 @@ button, .submit_button {
     color: white;
 }
 
+
 button a {
     color: white;
 }
@@ -98,10 +102,19 @@ button a {
 button:hover, .submit_button:hover {
     background-color: #F9A325;
     transition: all 0.5s;
+    cursor:pointer;
 }
 
 button a:hover {
     color: white;
+}
+
+.cancel_button {
+    background-color:#F9A325;
+}
+
+.cancel_button:hover {
+    background-color:#8246AF;
 }
 
 .hero {
@@ -146,4 +159,10 @@ button a:hover {
 
 #user-stories .story-card h3 {
     font-size: 18px;
+}
+
+th {
+    text-align: left;
+    padding-right: 20px;
+    vertical-align: text-top;
 }

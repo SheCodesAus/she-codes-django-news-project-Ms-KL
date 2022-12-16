@@ -25,6 +25,10 @@ class StoryForm(ModelForm):
 # -----------------------
 # COMMENT BLOCK
 class CommentForm(ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        self.fields['content'].label = ""
     class Meta:
         model = Comment
         fields = ["content"]

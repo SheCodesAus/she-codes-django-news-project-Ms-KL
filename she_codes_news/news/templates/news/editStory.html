@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+    <h2>Edit your story</h2>
+    {% if request.user.is_authenticated %}
+        {% if request.user == story.author %}
+            <form action="{% url 'news:editStory' story.id %}" method="post">
+                {% csrf_token %}
+                <table class="form_table">
+                    {{ form.as_table }}
+                </table>
+                <input type="submit" value="Re-Submit" class="submit_button">
+                <button class="cancel_button"><a href="{% url 'news:story' story.id %}">Cancel</a></button>
+            </form>
+        {% else %}
+            <meta http-equiv="refresh" content="0; URL={% url 'news:story' story.id %}" />
+        {% endif %}
+    {% endif %}
+</main>
+
+{% endblock content %}

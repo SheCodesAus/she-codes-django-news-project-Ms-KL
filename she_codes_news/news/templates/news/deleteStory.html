@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+
+    {% if request.user.is_authenticated %}
+        {% if request.user == story.author %}
+            <form method="post">
+                {% csrf_token %}
+                <h2>Hi {{ story.author}}!</h2>
+                <h3>Are you sure you want to delete <u>{{ story.title }}?</u></h3>
+                <input type="submit" value="Confirm" class="submit_button">
+                <button class="cancel_button"><a href="{% url 'news:story' story.id %}">Cancel</a></button>
+            </form>
+        {% else %}
+            <meta http-equiv="refresh" content="0; URL={% url 'news:story' story.id %}" />
+        {% endif %}
+    {% endif %}
+</main>
+{% endblock %}

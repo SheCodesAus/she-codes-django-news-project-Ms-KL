@@ -4,6 +4,7 @@ from news.models import NewsStory
 from .forms import StoryForm, CommentForm
 from django.shortcuts import render, get_object_or_404
 from users.models import CustomUser 
+from django.contrib.auth.decorators import login_required
 
 # -----------------------
 # INDEX BLOCK (NEWS)
@@ -88,6 +89,37 @@ class AddCommentView(generic.CreateView):
         pk = self.kwargs.get("pk")
         return reverse_lazy("news:story", kwargs={"pk":pk})
 
+# -----------------------
+# EDITSTORY BLOCK
+
+class EditStoryView(generic.UpdateView):
+    form_class = StoryForm
+    model = NewsStory
+    context_object_name = 'story'
+    template_name = 'news/editStory.html'
+    success_url = reverse_lazy("news:newsStory")
+
+    def form_valid(self, form):
+        """Save the form and redirect to the success URL."""
+        # Save the updated form
+        pk = self.kwargs.get("pk")
+        story = get_object_or_404(NewsStory, pk=pk)
+        form.instance.story = story
+        return super().form_valid(form) 
+
+    def get_success_url(self) -> str:
+        pk = self.kwargs.get("pk")
+        return reverse_lazy("news:story", kwargs={"pk":pk})
+
+
+
+class DeleteStoryView(generic.DeleteView):
+    model = NewsStory
+    context_object_name = 'story'
+    template_name = 'news/deleteStory.html'
+    success_url = reverse_lazy('news:index')
+
+
 
 # -----------------------
     # FUNCTION:
@@ -101,6 +133,7 @@ class AddCommentView(generic.CreateView):
     # https://docs.djangoproject.com/en/4.0/intro/tutorial03/
     # https://shecodesaus.slack.com/archives/CLE9UP5QD/p1670635169787339
     # https://www.youtube.com/watch?v=xNV4GFgRCUE
+    # https://docs.djangoproject.com/en/4.0/ref/class-based-views/generic-editing/#formview
     # Which Django generic to use for which job?
         # generic.ListView for when you want to see all (or a subset) of a models data
         # generic.DetailView for when you want one specific item from a model

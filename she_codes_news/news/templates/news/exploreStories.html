@@ -6,8 +6,8 @@
     {% endblock %}
 
     {% block content %}
-
-    <section>
+    
+    <main>
         <div class="hero">
             <!-- EXPLORE ALL STORIES BLOCK -->
             <h2>Explore All Stories</h2>
@@ -30,17 +30,17 @@
             <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
             {% endif %}
         </div>
-    </section>
 
-    <div id="all-stories">
-        {% if all_stories %}
-            {% for story in all_stories %}
-                {% include "./storyCard.html" with story=story %}
-            {% endfor %}
-        {% else %}
-            <p>No stories are available.</p>
-        {% endif %}
-    </div>
+        <div id="all-stories">
+            {% if all_stories %}
+                {% for story in all_stories %}
+                    {% include "./storyCard.html" with story=story %}
+                {% endfor %}
+            {% else %}
+                <p>No stories are available.</p>
+            {% endif %}
+        </div>
+    </main>
 
     {% endblock %} 
 

@@ -9,40 +9,48 @@
 
 <!-- STORY BLOCK -->
 <!-- DO: add clickable author link-->
-<div id="story-wrapper">
-    <h2>{{ story.title }}</h2>
-    <div id="story-content">
-        <img src="{{ story.image_field }}">
-        <h4>Published by {{ story.author }} - {{ story.pub_date }}</h4>
-        {{ story.content|linebreaks }}
-    </div>
-</div>
-
-<!-- ADD COMMENT BLOCK -->
-    <div id="comment-wrapper">
-        {% if request.user.is_authenticated %}
-        <p><a href="{% url 'news:addComment' story.id %}">Add a Comment</a></p>
-        <div>
-            <form method="POST" action="{{ form_action }}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Add Comment</button>
-            </form>
+<main>
+    <div id="story-wrapper">
+        <h2>{{ story.title }}</h2>
+        <h4>Written by {{ story.author }}, {{ story.pub_date|date:'d b y' }}</h4>
+        <div id="story-content">
+            <img src="{{ story.image_field }}">
+            {{ story.content|linebreaks }}
         </div>
-        {% else %}
-            <button><a href="{% url 'login' %}">Login to Add a Comment</a></button>
-        {% endif %}
 
-<!-- EXISTING COMMENT BLOCK -->
-<!-- DO: add clickable author link-->
-    <ul>
-    {% for comment in story.comments.all %}
-        <li>{{ comment.author.username }} ({{comment.created_at}}): {{ comment.content }}</li>
-    {% endfor %}
-    </ul>
-</div>
-
+        <!-- EXISTING COMMENT BLOCK -->
+        <!-- DO: add clickable author link-->
+        <h4>Comments</h4>
+        <ul>
+            {% for comment in story.comments.all %}
+                <li>{{ comment.author.username }} ({{comment.created_at|date:'d M y' }}): {{ comment.content }}</li>
+            {% endfor %}
+            </ul>
+        <!-- ADD COMMENT BLOCK -->
+        <div id="comment-wrapper">
+            {% if request.user.is_authenticated %}
+            <div>
+                <form method="POST" action="{{ form_action }}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Add Comment</button>
+                    {% if request.user == story.author %}
+                    <button><a href="{% url 'news:editStory' story.id %}">Edit Your Story</a></button>
+                    <button><a href="{% url 'news:deleteStory' story.id %}">Delete Your Story</a></button>
+                {% else %}
+                    {% endif %}
+                </form>
+            </div>
+            {% else %}
+                <button><a href="{% url 'login' %}">Login to add a comment</a></button>    
+            {% endif %}
+        </div>
+    </div>
+</main>
 {% endblock %}
+
+
+
 
 <!-- 
     FUNCTION:
