@@ -12,7 +12,7 @@ class StoryForm(ModelForm):
             'title': ('Story Title'),
             'pub_date': ('Date Published'),
             'image_field': ('Image URL'),
-            'content': ('Write your Blog'),
+            'content': ('Write a Story'),
         }
         widgets = {
             'title':forms.TextInput(attrs={'class':'form-control'},),
