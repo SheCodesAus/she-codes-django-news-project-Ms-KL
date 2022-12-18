@@ -8,35 +8,43 @@
 {% endblock %}
 {% block content %}
 <main>
-
-    <button><a href="{% url 'news:allStories' %}">Explore Stories by All Authors</a></button>         
-    {% if request.user.is_authenticated %}
-        {% if request.user.id == user.id %}
-        <button><a href="{% url 'users:changePassword' %}">Change Password</a></button>
-        {% endif %}
-    {% else %}
-    {% endif %}
-
-    <div id="account-wrapper">
-        <h2>{{ user.username }}'s Account:</h2>
-        <ul>
-            <li><b>Username:</b> {{ user.username }}</li>
-            <li><b>Email:</b> {{ user.email }}</li>
-        </ul>
-        <br>
+    <button><a href="{% url 'news:allStories' %}">Explore Stories by All Authors</a></button>  
+    <div class="hero">   
+        {% if request.user.is_authenticated %}
+            {% if request.user.id == user.id %}
+                <h2>Welcome back {{ user.username }}!</h2>
+                <table id="profile_table">
+                    <tr>
+                        <td><b>Your Email:</b></td> 
+                        <td>&nbsp;&nbsp;{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Your Username:</b></td> 
+                        <td>&nbsp;&nbsp;{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Your Password:</b></td>
+                        <td>&nbsp;<button><a href="{% url 'users:changePassword' %}">Change</a></button>
+                    </tr>            
+                </table>
     </div>
-
-    <div id="user-stories">
-        <h3>{{ user.username }}'s Stories:</h3>
-        {% if user_stories %}
-            {% for story in user_stories %}
-                <!-- SETUP NEWS Step 12: Use story card template -->
-                {% include "news/storyCard.html" with story=story position=forloop.counter %}
-                <!-- <p>{{ story.title }}</p> -->
-            {% endfor %}
+                <h3>Your Stories:</h3>
+            {% else %}
+                <h2>View {{ user.username }}'s Stories</h2>
+            {% endif %}
         {% else %}
-            <p>No stories are available.</p>
+        <h2>View {{ user.username }}'s Stories</h2>
         {% endif %}
+    <div id="user-stories">
+            {% if user_stories %}
+                {% for story in user_stories %}
+                    <!-- SETUP NEWS Step 12: Use story card template -->
+                    {% include "news/storyCard.html" with story=story position=forloop.counter %}
+                    <!-- <p>{{ story.title }}</p> -->
+                {% endfor %}
+            {% else %}
+                <p>No stories are available.</p>
+            {% endif %}
     </div>
 </main>
 
