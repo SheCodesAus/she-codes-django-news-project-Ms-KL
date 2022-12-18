@@ -8,17 +8,6 @@ class CustomUser(AbstractUser):
         return self.username
 
 # -----------------------
-    # FUNCTION:
-    # <INSERT>
-
-    # ASSIGNMENT:
-    # <INSERT>
-
-    # REFERENCES:
-    # <INSERT>
-
-    # ALTERNATIVE SOLUTIONS:
-    # {% comment %}
 
         # ALTERNATIVE 1:
         # class CustomUser(AbstractUser):

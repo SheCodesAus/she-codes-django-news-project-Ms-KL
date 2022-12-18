@@ -19,6 +19,7 @@ class AccountView(generic.DetailView):
     model = CustomUser
     template_name = 'users/profile.html'
     context_object_name = 'user'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user_stories'] = NewsStory.objects.filter(author=self.kwargs['pk'])
@@ -39,25 +40,7 @@ def ChangePasswordView(request):
 
 
 
-
-# class ChangePasswordView(generic.edit.UpdateView):
-#     model = CustomUser
-#     template_name = 'users/changePassword.html'
-#     context_object_name = 'user'
-    
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['user_stories'] = NewsStory.objects.filter(author=self.kwargs['pk'])
-#         return context
-
-
 # -----------------------
-    # FUNCTION:
-    # <INSERT>
-
-    # ASSIGNMENT:
-    # <INSERT>
-
     # REFERENCES:
     # Which Django generic to use for which job?
         # generic.ListView for when you want to see all (or a subset) of a models data
@@ -71,5 +54,15 @@ def ChangePasswordView(request):
     # {% comment %}
 
         # from django.shortcuts import render
+
+        # class ChangePasswordView(generic.edit.UpdateView):
+        #     model = CustomUser
+        #     template_name = 'users/changePassword.html'
+        #     context_object_name = 'user'
+            
+        #     def get_context_data(self, **kwargs):
+        #         context = super().get_context_data(**kwargs)
+        #         context['user_stories'] = NewsStory.objects.filter(author=self.kwargs['pk'])
+        #         return context
 
     # {% endcomment %}

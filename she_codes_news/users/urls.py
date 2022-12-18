@@ -13,11 +13,6 @@ urlpatterns = [
     path('change-password-done/', ChangePasswordDoneView, name='changePassword_done'),
 ]
 # -----------------------
-    # FUNCTION:
-    # <INSERT>
-
-    # ASSIGNMENT:
-    # <INSERT>
 
     # REFERENCES:
     # ID PK to identify individual users

@@ -36,12 +36,6 @@ class CommentForm(ModelForm):
 
 
 # -----------------------
-    # FUNCTION:
-    # <INSERT>
-
-    # ASSIGNMENT:
-    # <INSERT>
-
     # REFERENCES:
         # https://djangocentral.com/creating-comments-system-with-django/
         # https://www.youtube.com/watch?v=0x0pWrm2nKI
