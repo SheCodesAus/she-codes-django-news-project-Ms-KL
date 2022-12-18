@@ -3,10 +3,14 @@ from django.db import models
 
 USER = get_user_model()
 
-
 # -----------------------
 # NEWSTORY BLOCK
 class NewsStory(models.Model):
+    '''
+    Data required for Story creation, editing and deletion.
+    Connected to user_model to allocate stories to logged in users.
+    Returns: Story Title w/ __str__ override
+    '''
     title = models.CharField(max_length=200)
     author = models.ForeignKey(
         USER, on_delete=models.CASCADE
@@ -21,8 +25,11 @@ class NewsStory(models.Model):
 
 # -----------------------
 # COMMENT BLOCK
-# https://youtu.be/SImJVdZocvQ
 class Comment(models.Model):
+    '''
+    Data required for users to comment on stories.
+    Returns: Comment Content w/ __str__ override
+    '''
     story = models.ForeignKey(NewsStory,on_delete=models.CASCADE,related_name='comments')
     author = models.ForeignKey(
         USER, related_name="comments", on_delete=models.CASCADE, null=True,
@@ -35,13 +42,8 @@ class Comment(models.Model):
         return self.content
 
 # -----------------------
-    # FUNCTION:
-    # <INSERT>
-
-    # ASSIGNMENT:
-    # <INSERT>
-
     # REFERENCES:
+    # https://youtu.be/SImJVdZocvQ
     # https://docs.djangoproject.com/en/4.0/topics/forms/modelforms/
     # https://docs.djangoproject.com/en/4.0/ref/forms/fields/#imagefield
     # must set default or URL field won't work

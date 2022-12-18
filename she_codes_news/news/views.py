@@ -12,16 +12,21 @@ class IndexView(generic.ListView):
     template_name = 'news/index.html'
 
     def get_queryset(self):
-        '''Return all news stories.'''
-        #  get all news stories and use in index
+        ''' 
+        Return all news stories. 
+        '''
         return NewsStory.objects.all()
 
     def get_context_data(self, **kwargs):
+        '''
+        Order all stories and latest stories in negative chronological order
+        Display latest stories from 0 - 3 index
+        Return the latest 4 stories and all stories in reverse chronological order
+        '''
         context = super().get_context_data(**kwargs)
         stories = NewsStory.objects.all().order_by('-pub_date')
         context['latest_stories'] = stories[:4]
-        # display all stories from after the last "latest_story" is displayed
-        context['all_stories'] = stories[4:]
+        context['all_stories'] = stories
         return context
 
 # -----------------------
@@ -31,19 +36,25 @@ class ExploreView(generic.ListView):
     template_name = 'news/exploreStories.html'
 
     def get_queryset(self):
-        '''Return all news stories.'''
+        '''
+        Return all news stories.
+        '''
         return NewsStory.objects.all()
     
     def get_queryset(self):
-        '''Return all authors of stories.'''
+        '''
+        Return all authors of stories.
+        '''
         return CustomUser.objects.all()
 
     def get_context_data(self, **kwargs):
+        '''
+        Return all stories in reverse chronological order and list of users as story authors
+        '''
         query = self.request.GET.get("author")
         context = super().get_context_data(**kwargs)
         context['all_stories'] = NewsStory.objects.all().order_by('-pub_date')
         context['story_authors'] = CustomUser.objects.all()
-        context['story_authors_select'] = NewsStory.objects.filter(author__username=query).order_by('-pub_date')
         return context
 
 # -----------------------
@@ -54,6 +65,9 @@ class StoryView(generic.DetailView):
     context_object_name = 'story'
 
     def get_context_data(self, **kwargs):
+        '''
+        Return a comment form and related comments
+        '''
         context = super().get_context_data(**kwargs)
         context["form"] = CommentForm()
         context["form_action"] = reverse_lazy("news:addComment", kwargs={"pk": self.kwargs.get('pk')})
@@ -69,6 +83,10 @@ class AddStoryView(generic.CreateView):
     success_url = reverse_lazy('news:index')
 
     def form_valid(self, form):
+        '''
+        allocates author name as logged in user name
+        Save the form and redirect to the success URL.
+        '''
         form.instance.author = self.request.user
         return super().form_valid(form)
 
@@ -81,6 +99,10 @@ class AddCommentView(generic.CreateView):
     template_name = 'news/createComment.html'
 
     def form_valid(self, form):
+        '''
+        Save the form and redirect to the success URL.
+        allocates comment against logged in user id and story the comment is related to
+        '''
         form.instance.author = self.request.user
         pk = self.kwargs.get("pk")
         story = get_object_or_404(NewsStory, pk=pk)
@@ -88,6 +110,9 @@ class AddCommentView(generic.CreateView):
         return super().form_valid(form)
     
     def get_success_url(self) -> str:
+        '''
+        Returns to the story with the new comment
+        '''
         pk = self.kwargs.get("pk")
         return reverse_lazy("news:story", kwargs={"pk":pk})
 
@@ -102,7 +127,9 @@ class EditStoryView(generic.UpdateView):
     success_url = reverse_lazy("news:newsStory")
 
     def form_valid(self, form):
-        """Save the form and redirect to the success URL."""
+        """
+        Save the form and redirect to the success URL.
+        """
         # Save the updated form
         pk = self.kwargs.get("pk")
         story = get_object_or_404(NewsStory, pk=pk)
@@ -110,6 +137,9 @@ class EditStoryView(generic.UpdateView):
         return super().form_valid(form) 
 
     def get_success_url(self) -> str:
+        '''
+        Redirect to the edited story
+        '''
         pk = self.kwargs.get("pk")
         return reverse_lazy("news:story", kwargs={"pk":pk})
 
@@ -117,6 +147,9 @@ class EditStoryView(generic.UpdateView):
 # DELETESTORY BLOCK
 
 def DeleteStoryDoneView(request):
+    '''
+    Redirect to deleted success page
+    '''
     return render(request, 'news/deleteStory_done.html', {})
 class DeleteStoryView(generic.DeleteView):
     model = NewsStory
@@ -125,15 +158,7 @@ class DeleteStoryView(generic.DeleteView):
     success_url = reverse_lazy('news:deleteStory_done')
 
 
-
-
 # -----------------------
-    # FUNCTION:
-    # <INSERT>
-
-    # ASSIGNMENT:
-    # <INSERT>
-
     # REFERENCES:
     # https://medium.com/@thexovc/how-to-order-blogpost-in-django-53218db7b092
     # https://docs.djangoproject.com/en/4.0/intro/tutorial03/
@@ -150,6 +175,9 @@ class DeleteStoryView(generic.DeleteView):
 
     # ALTERNATIVE SOLUTIONS:
     # {% comment %}
+
+        # FILTERING
+        # context['story_authors_select'] = NewsStory.objects.filter(author__username=query).order_by('-pub_date')
 
         # ALTERNATIVE 1: ADD COMMENTS
             # def post_detail(request, slug):
