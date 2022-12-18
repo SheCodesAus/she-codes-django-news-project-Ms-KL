@@ -40,8 +40,6 @@ def ChangePasswordView(request):
 
 
 
-
-
 # class ChangePasswordView(generic.edit.UpdateView):
 #     model = CustomUser
 #     template_name = 'users/changePassword.html'
