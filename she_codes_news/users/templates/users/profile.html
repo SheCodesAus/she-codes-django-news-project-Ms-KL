@@ -1,18 +1,22 @@
-<!-- PROJECT PART 2: SETUP ACCOUNT VIEW -->
-
-
 {% extends "base.html" %}
 {% load static %}
+
 {% block stylesheets %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 {% endblock %}
+
 {% block content %}
 <main>
     <button><a href="{% url 'news:allStories' %}">Explore Stories by All Authors</a></button>  
-    <div class="hero">   
+    <!------------ HERO BLOCK ------------>
+    <div class="hero">  
+
         {% if request.user.is_authenticated %}
+        <!-- Only load for user -->
             {% if request.user.id == user.id %}
+                <!-- Only load if profile user is the logged in user -->
                 <h2>Welcome back {{ user.username }}!</h2>
+                <!------------ USER DETAILS BLOCK ------------> 
                 <table id="profile_table">
                     <tr>
                         <td><b>Your Email:</b></td> 
@@ -28,6 +32,7 @@
                     </tr>            
                 </table>
     </div>
+            <!------------ USER STORIES BLOCK ------------> 
                 <h3>Your Stories:</h3>
             {% else %}
                 <h2>View {{ user.username }}'s Stories</h2>
@@ -38,9 +43,7 @@
     <div id="user-stories">
             {% if user_stories %}
                 {% for story in user_stories %}
-                    <!-- SETUP NEWS Step 12: Use story card template -->
                     {% include "news/storyCard.html" with story=story position=forloop.counter %}
-                    <!-- <p>{{ story.title }}</p> -->
                 {% endfor %}
             {% else %}
                 <p>No stories are available.</p>
