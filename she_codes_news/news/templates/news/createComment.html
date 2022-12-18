@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- COMMENT BLOCK -->
+<!------------ CREATE COMMENT BLOCK (separate url) ------------>
 <form action="" method="post">
     {% csrf_token %}
     <table class="form_table">
@@ -14,7 +14,7 @@
 
 <!-- 
     FUNCTION:
-    This can also be used as a stand-alone url but is not being used.
+    This can be used for a stand-alone url but is not being used.
     Code placed in story.html directly
     Kept for reference
 

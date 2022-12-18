@@ -1,4 +1,4 @@
-<!-- STORY BLOCK -->
+<!------------ STORY CARD ------------>
 <div class="story-card" id="story-card-{{ position }}">
     <a href="{% url 'news:story' story.id %}">
         {% if story.image_field %}
@@ -14,7 +14,9 @@
     </a>
 </div>
 
-<!-- 
+<!------------------------------------------------------
+PROJECT NOTES:
+--------------------------------------------------------
     FUNCTION:
     This creates story card to be embedded into index.html
 

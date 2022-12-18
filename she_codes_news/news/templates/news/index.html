@@ -8,18 +8,23 @@
     {% block content %}
 
     <main>
+        <!------------ HERO BLOCK ------------>
         <div class="hero">
-            <h2>Latest News</h2>
-            <!-- EXPLORE ALL STORIES LINK + WRITE NEW STORY BLOCK W/ LOGIN PROMPT -->
-            {% if request.user.is_authenticated %}
-            <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
-            {% else %}
-            <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
-            {% endif %}
-            <button><a href="{% url 'news:allStories' %}">Explore all Stories</a></button>
+            <h2>Latest Stories</h2>
+            <!------------ BUTTON BLOCK ------------>
+            <div class="hero_buttons">
+                {% if request.user.is_authenticated %}
+                <!-- Only load for users -->
+                <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
+                {% else %}
+                <!-- Only load for visitors -->
+                <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
+                {% endif %}
+                <button><a href="{% url 'news:allStories' %}">Explore all Stories</a></button>
+            </div>
         </div>
 
-        <!-- LATEST STORIES BLOCK -->
+        <!------------ LATEST STORIES BLOCK ------------>
         <div id="latest-stories">
             {% if latest_stories %}
                 {% for story in latest_stories %}
@@ -33,7 +38,9 @@
 
     {% endblock %}
 
-<!-- 
+<!------------------------------------------------------
+PROJECT NOTES:
+--------------------------------------------------------
     FUNCTION:
     This page displays a list of the latest 4 stories in reverse chronological order.
     This page displays a list of all stories in reverse chronological order (from where the latest stories left off)

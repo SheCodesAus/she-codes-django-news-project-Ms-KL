@@ -8,31 +8,31 @@
     {% block content %}
     
     <main>
-
+        <!------------ HERO BLOCK ------------>
         <div class="hero">
-                <!-- EXPLORE ALL STORIES BLOCK -->
             <h2>Explore All Stories</h2>
-            <!-- AUTHOR BLOCK -->                
+            <!------------ AUTHOR BLOCK ------------>            
             <div id="all-authors">
                 {% if story_authors %}
-                |
+                <img class="divider_icon" src="{% static '/images/bullet_purple.png' %}" /> 
                     {% for author in story_authors %}
-                        <a href="{% url 'users:profile' author.id %}">{{ author }}</a> |
+                        <a href="{% url 'users:profile' author.id %}">&nbsp; {{ author }} &nbsp;</a> <img class="divider_icon" src="{% static '/images/bullet_purple.png' %}" />
                     {% endfor %}
                 {% else %}
                     <p>No authors are available.</p>
-                    <br>
                 {% endif %}
-                <br>
-                <br>
             </div>
 
-        <!-- WRITE NEW STORY BLOCK W/ LOGIN PROMPT -->
-            {% if request.user.is_authenticated %}
-            <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
-            {% else %}
-            <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
-            {% endif %}
+        <!------------ BUTTON BLOCK ------------>
+            <div class="hero_buttons">
+                {% if request.user.is_authenticated %}
+                <!-- Only load for users -->
+                <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
+                {% else %}
+                <!-- Only load for visitors -->
+                <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
+                {% endif %}
+            </div>
         </div>
 
         <div id="all-stories">
@@ -48,7 +48,9 @@
 
     {% endblock %} 
 
-<!-- 
+<!------------------------------------------------------
+PROJECT NOTES:
+--------------------------------------------------------
     FUNCTION:
     This page is viewed when the link "explore all stories" is clicked from the news page and goes to: news/explore-all-stories/
     This page displays clickable links to authors of the websites. This link leads to each individual author's profile page, which lists their stories and information.
@@ -73,9 +75,28 @@
     {% comment %}
 
         -------------- 
+        <div class="hero">
+                EXPLORE ALL STORIES BLOCK -->
+                <!-- <h2>Explore All Stories</h2> -->
+                <!-- AUTHOR BLOCK -->              
+                <!-- <div id="all-authors">
+                    {% if story_authors %}
+                    |
+                        {% for author in story_authors %}
+                            <a href="{% url 'users:profile' author.id %}">{{ author }}</a> |
+                        {% endfor %}
+                    {% else %}
+                        <p>No authors are available.</p>
+                        <br>
+                    {% endif %}
+                    <br>
+                    <br>
+                </div> -->
 
-        ** fave: PRINT LIST OF NAMES USING LOOP, WHICH CLICKS THROUGH TO THEIR PROFILE
-            <div class="hero"> -->
+
+<!-- 
+        ** fave: LOOP AND LIST -->
+            <!-- <div class="hero"> --> 
             <!-- EXPLORE ALL STORIES BLOCK -->
             <!-- <h2>Explore All Stories</h2> -->
             <!-- AUTHOR BLOCK -->                

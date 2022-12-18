@@ -1,40 +1,34 @@
-<!-- SETUP NEWS Step 10: update directories static files -->
+
 {% load static %}
 <!doctype html>
 
-<!-- KG: 
-    USE: this for every website page
-    Use separate templates to use across whole website
-    These are separate to be more modular 
--->
-
 <html lang="en">
+    <!------------ HEAD BLOCK ------------>
     <head>
         <meta charset="utf-8">
         <title>She Codes Pet Post</title>
         <meta name="description" content="She Codes Pet Post">
         <meta name="author" content="Kristy Gray">
         <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
-        <!-- SETUP NEWS Step 10: update directories for templates and static files -->
+
         <link rel="icon" type="image/x-icon" href=" {% static 'images/favicon_purple.ico' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'styles.css'%}">
-            <!-- SETUP NEWS Step 11: add stylesheet block -->
+
             {% block stylesheets %}{% endblock %}
     </head>
 
     <body>
+        <!------------ HEADER BLOCK ------------>
         <header>
             <div id="header-text">
                 <a id="header-link" href="{% url 'news:index' %}">
                     <img src="{% static '/images/logo.png' %}" />
-                    <!-- <h1>She {Codes} News</h1> -->
                 </a>
             </div>
-            <!-- SETUP NEWS Step 15: Include nav template in base template-->
+            <!------------ NAV BLOCK ------------>
             {% include './nav.html' %}
         </header>
-
-        <!-- SETUP NEWS Step 10: update directories for templates and static files -->
+        <!------------ EXTEND TO OTHER PAGES ------------>
         {% block content %}{% endblock %}
     </body>
 </html>

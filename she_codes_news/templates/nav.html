@@ -1,19 +1,19 @@
-<!-- SETUP USERS: Step 8 Change what is in the nav based on whether the user is logged in or not-->
-<!-- this is {# {{ jinja }} #} -->
-
+<!------------ NAV BLOCK ------------>
 <nav>
     <a href="{% url 'news:index' %}">Home</a>
-    <a href="{% url 'news:allStories' %}">Story</a>
+    <a href="{% url 'news:allStories' %}">Stories</a>
     {% if request.user.is_authenticated %}
-    <a href="{% url 'users:profile' request.user.id %}">{{ request.user.username }}</a>
-        <!-- <a href="users/view-account/">{{ user.username }}</a>
-        HELP! -->
+    <!-- Only load for current user -->
+        <a href="{% url 'users:profile' request.user.id %}">{{ request.user.username }}</a>
         {% if request.user.is_superuser %}
+        <!-- Only load for ADMIN -->
             <a href="/admin/">Admin</a>
         {% else %}
+            <!-- Don't load anything if not admin-->
         {% endif %}
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
+        <!-- Only load for visitors -->
         <a href="{% url 'login' %}">Login</a>
     {% endif %}
 </nav>

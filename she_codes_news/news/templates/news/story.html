@@ -7,52 +7,62 @@
 
 {% block content %}
 
-<!-- STORY BLOCK -->
-<!-- DO: add clickable author link-->
 <main>
+    <!------------ STORY BLOCK ------------>
     <div id="story-wrapper">
         <h2>{{ story.title }}</h2>
-        <h4>Written by {{ story.author }}, {{ story.pub_date|date:'d b y' }}</h4>
+        <h4>Written by <a class="author_links" href="{% url 'users:profile' story.author.id %}">{{ story.author }}</a>, {{ story.pub_date|date:'d M y' }}</h4>
         <div id="story-content">
             <img src="{{ story.image_field }}">
             {{ story.content|linebreaks }}
         </div>
 
-        <!-- EXISTING COMMENT BLOCK -->
-        <!-- DO: add clickable author link-->
+        <!------------ EXISTING COMMENT BLOCK ------------>
         <h4>Comments</h4>
+        {% if story.comments.all %}
         <ul>
             {% for comment in story.comments.all %}
-                <li>{{ comment.author.username }} ({{comment.created_at|date:'d M y' }}): {{ comment.content }}</li>
+                <li><a class="author_links" href="{% url 'users:profile' comment.author.id %}">{{ comment.author.username }}</a> [{{comment.created_at|date:'d M y @ g.i a' }}]&nbsp; {{ comment.content }}</li>
             {% endfor %}
             </ul>
-        <!-- ADD COMMENT BLOCK -->
+        {% else %}
+            <p>No comments submitted.</p>
+        {% endif %}
+
+        <!------------ ADD COMMENT BLOCK ------------>
         <div id="comment-wrapper">
             {% if request.user.is_authenticated %}
-            <div>
-                <form method="POST" action="{{ form_action }}">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Add Comment</button>
-                    {% if request.user == story.author %}
-                    <button><a href="{% url 'news:editStory' story.id %}">Edit Your Story</a></button>
-                    <button><a href="{% url 'news:deleteStory' story.id %}">Delete Your Story</a></button>
-                {% else %}
-                    {% endif %}
-                </form>
-            </div>
+            <!-- Only load for users -->
+            <form method="POST" action="{{ form_action }}">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <!------------ BUTTON BLOCK ------------>
+                <button type="submit">Add Comment</button>
+                {% if request.user == story.author %}
+                <button><a href="{% url 'news:editStory' story.id %}">Edit Your Story</a></button>
+                <button><a href="{% url 'news:deleteStory' story.id %}">Delete Your Story</a></button>
             {% else %}
+                <!-- Don't load anything for visitors -->
+                {% endif %}
+            </form>
+            {% else %}
+                <!-- Only load for visitors -->
                 <button><a href="{% url 'login' %}">Login to add a comment</a></button>    
             {% endif %}
         </div>
     </div>
 </main>
+
 {% endblock %}
 
 
+<!------------------------------------------------------
+PROJECT NOTES:
+--------------------------------------------------------
+    VISITOR = someone who is browsing the website
+    USER = a visitor with an account, who is logged into the website
 
-
-<!-- 
     FUNCTION:
     This page is viewed when an individual story is clicked from the index.html (news) page or if the story link is directly accessed.
     This page displays a single story, the author, date posted, title of story, story image, comment form and comment history.
