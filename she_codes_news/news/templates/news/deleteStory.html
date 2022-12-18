@@ -10,10 +10,11 @@
 
     {% if request.user.is_authenticated %}
         {% if request.user == story.author %}
-            <form method="post">
+            <form id="delete_confirm" method="post">
                 {% csrf_token %}
                 <h2>Hi {{ story.author}}!</h2>
-                <h3>Are you sure you want to delete <u>{{ story.title }}?</u></h3>
+                <h3>Are you sure you want to delete: <strong>"<a href="{% url 'news:story' story.id %}">{{ story.title }}</a>"?</strong></h3>
+
                 <input type="submit" value="Confirm" class="submit_button">
                 <button class="cancel_button"><a href="{% url 'news:story' story.id %}">Cancel</a></button>
             </form>

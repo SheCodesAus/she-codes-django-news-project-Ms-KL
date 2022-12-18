@@ -7,7 +7,7 @@
 
 {% block content %}
 <main>
-    <h2>Edit your story</h2>
+    <h2>Edit your Story</h2>
     {% if request.user.is_authenticated %}
         {% if request.user == story.author %}
             <form action="{% url 'news:editStory' story.id %}" method="post">
