@@ -39,9 +39,11 @@ class ExploreView(generic.ListView):
         return CustomUser.objects.all()
 
     def get_context_data(self, **kwargs):
+        query = self.request.GET.get("author")
         context = super().get_context_data(**kwargs)
         context['all_stories'] = NewsStory.objects.all().order_by('-pub_date')
         context['story_authors'] = CustomUser.objects.all()
+        context['story_authors_select'] = NewsStory.objects.filter(author__username=query).order_by('-pub_date')
         return context
 
 # -----------------------
@@ -114,11 +116,16 @@ class EditStoryView(generic.UpdateView):
 # -----------------------
 # DELETESTORY BLOCK
 
+def DeleteStoryDoneView(request):
+    return render(request, 'news/deleteStory_done.html', {})
 class DeleteStoryView(generic.DeleteView):
     model = NewsStory
     context_object_name = 'story'
     template_name = 'news/deleteStory.html'
-    success_url = reverse_lazy('news:index')
+    success_url = reverse_lazy('news:deleteStory_done')
+
+
+
 
 # -----------------------
     # FUNCTION:
