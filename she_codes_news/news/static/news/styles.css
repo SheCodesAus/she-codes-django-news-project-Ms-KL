@@ -114,22 +114,8 @@
     color:  #8246AF;
 }
 
-#delete_confirm h3 {
+.delete_confirm h3, .delete_confirm h2, .change_confirm h2 {
     margin-bottom: 20px;
-}
-
-/* --------------- (FORM) TABLE FORMATTING ---------------  */
-
-.form_table {
-    text-align: left;
-}
-
-label {
-    padding-right: 20px;
-}
-
-.form-control {
-    width: 95%;
 }
 
 /* --------------- IMAGE FORMATTING ---------------  */

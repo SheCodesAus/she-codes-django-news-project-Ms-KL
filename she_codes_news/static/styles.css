@@ -112,6 +112,20 @@ button:hover, .submit_button:hover {
     margin: 20px;
 }
 
+/* --------------- (FORM) TABLE FORMATTING ---------------  */
+
+.form_table {
+    text-align: left;
+}
+
+label {
+    padding-right: 20px;
+}
+
+.form-control {
+    width: 95%;
+}
+
 /* --------------- USER / AUTHOR PROFILE FORMATTING  ---------------  */
 
 #user-stories {
