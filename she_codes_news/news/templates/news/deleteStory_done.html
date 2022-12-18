@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main>
+    <h2>You have successfully deleted your story!</h2>
+    <br>
+    <br>
+    <button><a href="{% url 'news:index' %}">Return to Home</a></button>
+    <button><a href="{% url 'news:allStories' %}">Explore all Stories</a></button>
+    <button><a href="{% url 'users:profile' request.user.id %}">View your Stories</a></button>
+</main>
+{% endblock %}
