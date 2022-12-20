@@ -1,0 +1,159 @@
+    {% extends "base.html" %}
+
+    {% load static %}
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+    {% endblock %}
+
+    {% block content %}
+    
+    <main>
+        <!------------ HERO BLOCK ------------>
+        <div class="hero">
+            <h2>Explore All Stories</h2>
+            <!------------ AUTHOR BLOCK ------------>            
+            <div id="all-authors">
+                {% if story_authors %}
+                <img class="divider_icon" src="{% static '/images/bullet_purple.png' %}" /> 
+                    {% for author in story_authors %}
+                        <a href="{% url 'users:profile' author.id %}">&nbsp; {{ author }} &nbsp;</a> <img class="divider_icon" src="{% static '/images/bullet_purple.png' %}" />
+                    {% endfor %}
+                {% else %}
+                    <p>No authors are available.</p>
+                {% endif %}
+            </div>
+
+        <!------------ BUTTON BLOCK ------------>
+            <div class="hero_buttons">
+                {% if request.user.is_authenticated %}
+                <!-- Only load for users -->
+                <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
+                {% else %}
+                <!-- Only load for visitors -->
+                <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
+                {% endif %}
+            </div>
+        </div>
+
+        <div id="all-stories">
+            {% if all_stories %}
+                {% for story in all_stories %}
+                    {% include "./storyCard.html" with story=story %}
+                {% endfor %}
+            {% else %}
+                <p>No stories are available.</p>
+            {% endif %}
+        </div>
+    </main>
+
+    {% endblock %} 
+
+<!------------------------------------------------------
+PROJECT NOTES:
+--------------------------------------------------------
+    FUNCTION:
+    This page is viewed when the link "explore all stories" is clicked from the news page and goes to: news/explore-all-stories/
+    This page displays clickable links to authors of the websites. This link leads to each individual author's profile page, which lists their stories and information.
+    This page also displays a list of all stories in reverse chronological order.
+    This page has a button that says "write new story" (if user is logged in) and goes to: news/add-story/
+    The link above says "Login to Write a New Story" if user is not logged in. If link is clicked, will be requested to login.
+    If a user who is not logged in navigates to the url directly (/news/add-story/), they will see a "Login to Write new story" button.
+
+    ASSIGNMENT:
+    This page is an optional "additional feature"
+    This page satisfies Part 1: 
+    - "Order the stories by date"
+    This page satisfies Part 2: 
+    - "View stories by a particular author"
+    - "Show/Hide the relevant information and buttons based on whether to user is logged in/out"
+    - "Enable/Disable the relevant features based on whether the user is logged in/out"
+
+    REFERENCES:
+    - https://www.youtube.com/watch?v=0x0pWrm2nKI
+
+    ALTERNATIVE SOLUTIONS:
+    {% comment %}
+
+        -------------- 
+        <div class="hero">
+                EXPLORE ALL STORIES BLOCK -->
+                <!-- <h2>Explore All Stories</h2> -->
+                <!-- AUTHOR BLOCK -->              
+                <!-- <div id="all-authors">
+                    {% if story_authors %}
+                    |
+                        {% for author in story_authors %}
+                            <a href="{% url 'users:profile' author.id %}">{{ author }}</a> |
+                        {% endfor %}
+                    {% else %}
+                        <p>No authors are available.</p>
+                        <br>
+                    {% endif %}
+                    <br>
+                    <br>
+                </div> -->
+
+
+<!-- 
+        ** fave: LOOP AND LIST -->
+            <!-- <div class="hero"> --> 
+            <!-- EXPLORE ALL STORIES BLOCK -->
+            <!-- <h2>Explore All Stories</h2> -->
+            <!-- AUTHOR BLOCK -->                
+            <!-- <div id="all-authors">
+                {% if story_authors %}
+                |
+                    {% for author in story_authors %}
+                        <a href="{% url 'users:profile' author.id %}">{{ author }}</a> |
+                    {% endfor %}
+                {% else %}
+                    <p>No authors are available.</p>
+                    <br>
+                {% endif %}
+            </div> -->
+            <!-- --------------- -->
+
+
+
+<!-- CANT USE: JAVASCRIPT due to onchange                 -->
+            <!-- <div id="all-authors">
+                {% if story_authors %}
+                <label for="authors">Filter by author:</label>
+
+                <select name="authors" onchange="location = this.value;" id="author">
+                    <option value="{% url 'news:allStories' %}">-- Filter by Author --</option>
+                    {% for author in story_authors %}
+                    <option value="{% url 'users:profile' author.id %}">{{ author }}</option>
+                    {% endfor %}
+                </select>
+                {% else %}
+                    <p>No authors are available.</p>
+                    <br>
+                {% endif %}
+            </div> -->
+
+
+             <!-- --------------- -->
+        <!-- ALTERNATIVE 1: AUTHOR BLOCK
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Filter</button>
+        </form>
+
+        ALTERNATIVE 2: AUTHOR BLOCK
+        <form method="POST">
+            {% csrf_token %}
+            <select name="author">
+                {% for author in displayauthor %}
+                    from story_dropdown function in views  -->
+                    <!-- <option value="{{ author }}">{{ author }}</option> -->
+                    <!-- put the author values from the author list as options -->
+                <!-- {% endfor %}
+            </select>
+            <button type="submit">Filter by Author</button>
+        </form> 
+
+    {% endcomment %}
+    -->
+

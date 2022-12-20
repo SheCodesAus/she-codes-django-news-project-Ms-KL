@@ -1,14 +1,49 @@
+<!------------ STORY CARD ------------>
 <div class="story-card" id="story-card-{{ position }}">
-    <a href="">
-        {% if position < 5 %}
-            <img src="../static/news/images/placeholder-{{ position }}.jpg">
+    <a href="{% url 'news:story' story.id %}">
+        {% if story.image_field %}
+            <img src="{{ story.image_field }}">
         {% else %}
-            <img src="https://picsum.photos/600">
+            <img src="https://ms-kl.github.io/images/shecodes-icon.png">
         {% endif %}
         <div class="story-card-text">
             <h3>{{ story.title }}</h3>
-            <h4>{{ story.author }}</h4>
-            <h4>{{ story.pub_date }}</h4>
+            <h4>{{ story.author}}</h4>
+            <h4>{{ story.pub_date|date:'d M y' }}</h4>
         </div>
     </a>
 </div>
+
+<!------------------------------------------------------
+PROJECT NOTES:
+--------------------------------------------------------
+    FUNCTION:
+    This creates story card to be embedded into index.html
+
+    ASSIGNMENT:
+    This page is part of the "News Setup"
+    This page satisfies Part 1: 
+    - "Add a field to the NewsStory model for an image url and use this image url rather than the default images provided by the starter"
+
+    ALTERNATIVE SOLUTIONS:
+    {% comment %}
+
+        ALTERNATIVE 1: STORY BLOCK
+        <div class="story-card" id="story-card-{{ position }}">
+            <a href="{% url 'news:story' story.id %}">
+                {% if position < 5 %}
+                    <img src="../static/news/images/placeholder-{{ position }}.jpg">
+                {% else %}
+                    <img src="https://ms-kl.github.io/images/shecodes-icon.png">
+                {% endif %}
+                <div class="story-card-text">
+                    <h3>{{ story.title }}</h3>
+                    <h4>{{ story.author }}</h4>
+                    <h4>{{ story.pub_date }}</h4>
+                </div>
+            </a>
+        </div>
+    
+    {% endcomment %}
+
+-->

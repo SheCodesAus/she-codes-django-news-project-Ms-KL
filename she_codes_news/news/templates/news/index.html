@@ -1,21 +1,73 @@
-    <h2>Latest News</h2>
+    {% extends "base.html" %}
 
-    <div id="latest-stories">
-        {% if latest_stories %}
-            {% for story in latest_stories %}
-                <p>{{ story.title }}</p>
-            {% endfor %}
-        {% else %}
-            <p>No stories are available.</p>
-        {% endif %}
-    </div>
+    {% load static %}
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+    {% endblock %}
 
-    <div id="all-stories">
-        {% if latest_stories %}
-            {% for story in all_stories %}
-                <p>{{ story.title }}</p>
-            {% endfor %}
-        {% else %}
-            <p>No stories are available.</p>
-        {% endif %}
-    </div>
+    {% block content %}
+
+    <main>
+        <!------------ HERO BLOCK ------------>
+        <div class="hero">
+            <h2>Latest Stories</h2>
+            <!------------ BUTTON BLOCK ------------>
+            <div class="hero_buttons">
+                {% if request.user.is_authenticated %}
+                <!-- Only load for users -->
+                <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
+                {% else %}
+                <!-- Only load for visitors -->
+                <button><a href="{% url 'login' %}">Login to Write a New Story</a></button>
+                {% endif %}
+                <button><a href="{% url 'news:allStories' %}">Explore all Stories</a></button>
+            </div>
+        </div>
+
+        <!------------ LATEST STORIES BLOCK ------------>
+        <div id="latest-stories">
+            {% if latest_stories %}
+                {% for story in latest_stories %}
+                    {% include "./storyCard.html" with story=story position=forloop.counter %}
+                {% endfor %}
+            {% else %}
+                <p>No stories are available.</p>
+            {% endif %}
+        </div>
+    </main>
+
+    {% endblock %}
+
+<!------------------------------------------------------
+PROJECT NOTES:
+--------------------------------------------------------
+    FUNCTION:
+    This page displays a list of the latest 4 stories in reverse chronological order.
+    This page displays a list of all stories in reverse chronological order (from where the latest stories left off)
+    This page has a button that says "write new story" (if user is logged in) and goes to: news/add-story/
+    The link above says "Login to Write a New Story" if user is not logged in. If link is clicked, will be requested to login.
+    If a user who is not logged in navigates to the url directly (/news/add-story/), they will see a "Login to Write new story" button.
+    This page has a link to "Explore all stories".
+
+    ASSIGNMENT:
+    This page is part of the "News Setup"
+    This page satisfies Part 1: 
+    - "Order the stories by date"
+    This page satisfies Part 2: 
+    - "Show/Hide the relevant information and buttons based on whether to user is logged in/out"
+    - "Enable/Disable the relevant features based on whether the user is logged in/out"
+
+    ALTERNATIVES:
+
+        ALL STORIES BLOCK (continues from where latest stories left off)
+        MOVED to Explore Stories Page
+        <div id="all-stories">
+            {% if latest_stories %}
+                {% for story in all_stories %}
+                    {% include "./storyCard.html" with story=story %}
+                {% endfor %}
+            {% else %}
+                <p>No stories are available.</p>
+            {% endif %}
+        </div>
+-->
