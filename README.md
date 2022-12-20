@@ -1,6 +1,5 @@
 # Plus Resources: Django Project Starter
-
 Starter code for the Plus Django project.
 
-Live video demo of project here:
-https://www.loom.com/share/95b45fa9ac584b78b067ef899faec633
+Kristy's Live video demo of project here:
+https://www.loom.com/share/fa6a7813a17f41b69c7a54d8ddf87a7a
