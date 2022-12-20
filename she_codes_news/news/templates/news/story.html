@@ -1,8 +1,130 @@
-<div id="story-wrapper">
-    <h2>{{ story.title }}</h2>
-    <h4>{{ story.author }}</h4>
-    <div id="story-content">
-        <img src="{% static '/news/images/placeholder-5.jpg' %}">
-        {{ story.content|linebreaks }}
+{% extends "base.html" %}
+
+{% load static %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<main>
+    <!------------ STORY BLOCK ------------>
+    <div id="story-wrapper">
+        <h2>{{ story.title }}</h2>
+        <h4>Written by <a class="author_links" href="{% url 'users:profile' story.author.id %}">{{ story.author }}</a>, {{ story.pub_date|date:'d M y' }}</h4>
+        <div id="story-content">
+            <img src="{{ story.image_field }}">
+            {{ story.content|linebreaks }}
+        </div>
+
+        <!------------ EXISTING COMMENT BLOCK ------------>
+        <h4>Comments</h4>
+        {% if story.comments.all %}
+        <ul>
+            {% for comment in story.comments.all %}
+                <li><a class="author_links" href="{% url 'users:profile' comment.author.id %}">{{ comment.author.username }}</a> [{{comment.created_at|date:'d M y @ g.i a' }}]&nbsp; {{ comment.content }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No comments submitted.</p>
+        {% endif %}
+
+        <!------------ ADD COMMENT BLOCK ------------>
+        <div id="comment-wrapper">
+            {% if request.user.is_authenticated %}
+            <!-- Only load for users -->
+            <form method="POST" action="{{ form_action }}">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <!------------ BUTTON BLOCK ------------>
+                <button type="submit">Add Comment</button>
+                {% if request.user == story.author %}
+                <button><a href="{% url 'news:editStory' story.id %}">Edit Your Story</a></button>
+                <button><a href="{% url 'news:deleteStory' story.id %}">Delete Your Story</a></button>
+            {% else %}
+                <!-- Don't load anything for visitors -->
+                {% endif %}
+            </form>
+            {% else %}
+                <!-- Only load for visitors -->
+                <button><a href="{% url 'login' %}">Login to add a comment</a></button>    
+            {% endif %}
+        </div>
     </div>
-</div>
+</main>
+
+{% endblock %}
+
+
+<!------------------------------------------------------
+PROJECT NOTES:
+--------------------------------------------------------
+    VISITOR = someone who is browsing the website
+    USER = a visitor with an account, who is logged into the website
+
+    FUNCTION:
+    This page is viewed when an individual story is clicked from the index.html (news) page or if the story link is directly accessed.
+    This page displays a single story, the author, date posted, title of story, story image, comment form and comment history.
+    This page has a text field and button that says "Add Comment" (if user is logged in), which posts comments to the page.
+    The link above says "Login to Add Comment" if user is not logged in. If link is clicked, will be requested to login.
+
+    ASSIGNMENT:
+    This page is part of the "News Setup"
+    This page contains optional "additional features": 
+    - Submit comments
+    - View comments
+    This page satisfies Part 2: 
+    - "Show/Hide the relevant information and buttons based on whether to user is logged in/out"
+    - "Enable/Disable the relevant features based on whether the user is logged in/out"
+
+    REFERENCES:
+    - https://www.youtube.com/watch?v=SImJVdZocvQ
+    - https://djangocentral.com/creating-comments-system-with-django/
+
+    ALTERNATIVE SOLUTIONS:
+    {% comment %}
+
+        ALTERNATIVE 1: STORY BLOCK
+        <div id="story-wrapper">
+            <h2>{{ story.title }}</h2>
+            <div id="story-content">
+                <img src="{% static '/news/images/placeholder-5.jpg' %}">
+
+                <h4>Published by {{ story.author }} - {{ story.pub_date }}</h4>
+                {{ story.content|linebreaks }}
+            </div>
+        </div>
+
+        ALTERNATIVE 1: COMMENT BLOCK
+        {% for comment in comments %}
+        <div>
+            <p>
+            {{ comment.commenter_name }}
+            <span>
+            {{ comment.comment_created_on }}
+            </span>
+            </p>
+            {{ comment.body | linebreaks }}
+        </div>
+        {% endfor %}
+        <div>
+            {% if new_comment %}
+                <div class="alert alert-success" role="alert">
+                    Your comment is awaiting moderation
+                </div>
+            {% else %}
+                <h3>Leave a comment</h3>
+                <form action="" method="post">
+                {% csrf_token %}
+                <table id="form_table">
+                    {{ comment_form.as_table }}
+                </table>
+                <input type="submit" value="submit">
+                </form>
+            {% endif %}
+        </div>
+
+    {% endcomment %}
+-->
+
